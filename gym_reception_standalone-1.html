@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>体育館 利用受付</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152238; --navy-2:#1E3358; --navy-3:#2A4A7C;
+    --amber:#F5A623; --amber-deep:#D68A0F;
+    --green:#2E9E5B; --green-bg:#E6F6EC;
+    --red:#E5484D; --red-bg:#FCEAEA;
+    --gray:#8A93A6; --gray-bg:#EEF0F4;
+    --bg:#F4F5F8; --surface:#FFFFFF; --line:#E1E4EA;
+    --ink:#151B2B; --ink-soft:#5B6478;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(21,34,56,.06), 0 10px 28px -14px rgba(21,34,56,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;}
+  .num{font-family:'Space Mono',monospace;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 0 40px;}
+  header.top{background:linear-gradient(120deg,var(--navy),var(--navy-2));color:#fff;padding:20px 20px 22px;}
+  header.top .row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;}
+  header.top h1{font-size:18px;margin:0 0 4px;font-weight:900;letter-spacing:.02em;}
+  header.top .sub{font-size:12px;opacity:.75;}
+  .clockbox{text-align:right;}
+  .clockbox .time{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;line-height:1;}
+  .clockbox .date{font-size:12px;opacity:.8;margin-top:4px;}
+  .period-badge{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;background:rgba(245,166,35,.18);border:1px solid var(--amber);color:var(--amber);font-size:12px;font-weight:700;}
+  .period-badge.off{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7);}
+  nav.tabs{display:flex;gap:4px;background:var(--surface);border-bottom:1px solid var(--line);padding:0 20px;position:sticky;top:0;z-index:5;}
+  nav.tabs button{appearance:none;border:none;background:none;padding:14px 10px;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;border-bottom:3px solid transparent;}
+  nav.tabs button.active{color:var(--navy);border-bottom-color:var(--amber);}
+  main{padding:18px 20px 0;}
+  .panelgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:680px){.panelgrid{grid-template-columns:1fr;}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
+  .sportcard h2{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px;}
+  .sportcard .count{font-size:12px;color:var(--ink-soft);margin-bottom:12px;}
+  .slotgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px;}
+  .slot{border-radius:10px;border:2px solid var(--line);background:#fff;padding:8px 6px;text-align:center;cursor:pointer;min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:2px;transition:transform .1s,border-color .15s;}
+  .slot:hover{transform:translateY(-1px);border-color:var(--amber);}
+  .slot .n{font-family:'Space Mono',monospace;font-weight:700;font-size:16px;}
+  .slot.avail{border-style:dashed;}
+  .slot.avail .n{color:var(--green);}
+  .slot.avail .st{font-size:10px;color:var(--green);}
+  .slot.occ{background:var(--gray-bg);border-color:var(--gray);}
+  .slot.occ .name{font-size:11px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;}
+  .slot.occ .st{font-size:10px;color:var(--ink-soft);}
+  .slot.over{background:var(--red-bg);border-color:var(--red);animation:pulse 2s ease-in-out infinite;}
+  .slot.over .st{color:var(--red);font-weight:700;}
+  @media(prefers-reduced-motion:reduce){.slot.over{animation:none;}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(229,72,77,.25);}50%{box-shadow:0 0 0 6px rgba(229,72,77,0);}}
+  .offhours{padding:40px 20px;text-align:center;color:var(--ink-soft);}
+  .offhours .big{font-size:32px;margin-bottom:8px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  thead th{text-align:left;font-size:11px;color:var(--ink-soft);border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap;}
+  tbody td{padding:8px;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);}
+  .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;}
+  .badge.active{background:var(--green-bg);color:var(--green);}
+  .badge.over{background:var(--red-bg);color:var(--red);}
+  .badge.closed{background:var(--gray-bg);color:var(--gray);}
+  .btn{appearance:none;border:none;border-radius:8px;padding:6px 10px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;}
+  .btn.primary{background:var(--navy);color:#fff;}
+  .btn.amber{background:var(--amber);color:#3a2400;}
+  .btn.ghost{background:none;border:1px solid var(--line);color:var(--ink-soft);}
+  .btn.danger{background:var(--red);color:#fff;}
+  .btn+.btn{margin-left:6px;}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
+  .toolbar .stats{font-size:12px;color:var(--ink-soft);}
+  /* schedule */
+  .schedwrap{overflow-x:auto;}
+  table.sched th,table.sched td{padding:8px;text-align:center;}
+  table.sched select{font-family:inherit;font-size:12px;padding:4px;border-radius:6px;border:1px solid var(--line);}
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(21,34,56,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50;}
+  .modal{background:#fff;border-radius:16px;max-width:380px;width:100%;padding:22px;box-shadow:var(--shadow);}
+  .modal h3{margin:0 0 14px;font-size:16px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:12px;color:var(--ink-soft);margin-bottom:4px;font-weight:700;}
+  .field input,.field select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;}
+  .modal .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
+  .ticket{border:2px dashed var(--navy-3);border-radius:12px;padding:18px;text-align:center;background:linear-gradient(160deg,#fff,#F7F9FF);}
+  .ticket .lbl{font-size:11px;color:var(--ink-soft);letter-spacing:.08em;}
+  .ticket .no{font-family:'Space Mono',monospace;font-weight:700;font-size:30px;color:var(--navy);margin:4px 0 10px;}
+  .ticket .row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-top:1px dashed var(--line);}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;box-shadow:var(--shadow);z-index:80;opacity:0;transition:opacity .25s;}
+  .toast.show{opacity:1;}
+  .empty{padding:30px;text-align:center;color:var(--ink-soft);font-size:13px;}
+  .footer-actions{margin-top:14px;text-align:right;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="row">
+      <div>
+        <h1>体育館 利用受付</h1>
+        <div class="sub">種目を選んで、開始時刻とお名前を入力してください</div>
+        <div id="periodBadge" class="period-badge">読み込み中…</div>
+      </div>
+      <div class="clockbox">
+        <div id="clock" class="time num">--:--</div>
+        <div id="dateLabel" class="date"></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button data-tab="reception" class="active">受付</button>
+    <button data-tab="roster">名簿・利用状況</button>
+    <button data-tab="settings">スケジュール設定</button>
+  </nav>
+
+  <main>
+    <section id="tab-reception"></section>
+    <section id="tab-roster" style="display:none"></section>
+    <section id="tab-settings" style="display:none"></section>
+  </main>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const SPORTS = {
+  '卓球':{max:7,unit:'卓球台',icon:'🏓'},
+  'バドミントン':{max:4,unit:'コート',icon:'🏸'},
+  'バレーボール':{max:1,unit:'コート',icon:'🏐'},
+  'バスケットボール':{max:1,unit:'コート',icon:'🏀'},
+  '武道':{max:1,unit:'フロア',icon:'🥋'},
+  'フリー':{max:1,unit:'スペース',icon:'⬜'}
+};
+const SPORT_KEYS = Object.keys(SPORTS);
+const WD = ['日','月','火','水','木','金','土'];
+const PERIODS = [
+  {key:'9-13',startH:9,endH:13,label:'9:00–13:00'},
+  {key:'13-17',startH:13,endH:17,label:'13:00–17:00'},
+  {key:'17-21',startH:17,endH:21,label:'17:00–21:00'}
+];
+
+let schedule = null;
+let tickets = [];
+let currentDate = new Date();
+let activeTab = 'reception';
+
+function pad(n){return String(n).padStart(2,'0');}
+function dateKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function fmtTime(d){return pad(d.getHours())+':'+pad(d.getMinutes());}
+function fmtDateLabel(d){return `${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;}
+
+function defaultSchedule(){
+  const per = {'9-13':['卓球','バドミントン'],'13-17':['バレーボール','バスケットボール'],'17-21':['武道','フリー']};
+  const sch = {};
+  for(let i=0;i<7;i++){ sch[i] = {'9-13':[...per['9-13']],'13-17':[...per['13-17']],'17-21':[...per['17-21']]}; }
+  return sch;
+}
+
+/* このファイルはブラウザの localStorage にデータを保存します。
+   同じ端末・同じブラウザで開く限りデータは保持されますが、
+   別の端末やブラウザ、シークレットモードでは共有されません。 */
+async function loadSchedule(){
+  try{
+    const v = localStorage.getItem('gymapp:schedule');
+    return v ? JSON.parse(v) : defaultSchedule();
+  }catch(e){ return defaultSchedule(); }
+}
+async function saveSchedule(){
+  try{ localStorage.setItem('gymapp:schedule', JSON.stringify(schedule)); }
+  catch(e){ showToast('設定の保存に失敗しました'); }
+}
+async function loadTickets(d){
+  try{
+    const v = localStorage.getItem('gymapp:tickets:'+dateKey(d));
+    return v ? JSON.parse(v) : [];
+  }catch(e){ return []; }
+}
+async function saveTickets(){
+  try{ localStorage.setItem('gymapp:tickets:'+dateKey(currentDate), JSON.stringify(tickets)); return true; }
+  catch(e){ showToast('保存に失敗しました。もう一度お試しください'); return false; }
+}
+
+function currentPeriod(now){
+  const h = now.getHours() + now.getMinutes()/60;
+  return PERIODS.find(p => h>=p.startH && h<p.endH) || null;
+}
+function computeEnd(t){
+  return new Date(new Date(t.start).getTime() + (t.baseHours+t.extensions)*3600000);
+}
+function isOvertime(t, now){
+  return t.status==='active' && now.getTime() > computeEnd(t).getTime();
+}
+function ticketsForSlot(sport, slot){
+  return tickets.filter(t=>t.sport===sport && t.slot===slot && t.status==='active');
+}
+function nextTicketNo(){
+  const d = currentDate;
+  const seq = tickets.length + 1;
+  return `${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(seq)===String(seq).padStart(3,'0')?String(seq).padStart(3,'0'):String(seq)}`;
+}
+
+function showToast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 1800);
+}
+
+/* ---------- header ---------- */
+function tickClock(){
+  const now = new Date();
+  document.getElementById('clock').textContent = fmtTime(now);
+  document.getElementById('dateLabel').textContent = fmtDateLabel(now);
+  const p = currentPeriod(now);
+  const badge = document.getElementById('periodBadge');
+  if(p){ badge.textContent = `受付中 ${p.label}`; badge.classList.remove('off'); }
+  else { badge.textContent = '受付時間外（9:00–21:00）'; badge.classList.add('off'); }
+}
+
+/* ---------- reception tab ---------- */
+function renderReception(){
+  const el = document.getElementById('tab-reception');
+  const now = new Date();
+  const p = currentPeriod(now);
+  if(!p){
+    el.innerHTML = `<div class="offhours card"><div class="big">🌙</div>受付時間外です。<br>受付は 9:00〜21:00 の間、随時行えます。</div>`;
+    return;
+  }
+  const daySports = (schedule[now.getDay()] && schedule[now.getDay()][p.key]) || [];
+  if(daySports.length===0){
+    el.innerHTML = `<div class="offhours card">本日この時間帯の種目が設定されていません。<br>「スケジュール設定」タブから設定してください。</div>`;
+    return;
+  }
+  el.innerHTML = `<div class="panelgrid">${daySports.map(sportPanel).join('')}</div>`;
+}
+function sportPanel(sport){
+  const meta = SPORTS[sport] || {max:1,unit:'枠',icon:'⬜'};
+  const now = new Date();
+  let occCount = 0;
+  const slots = [];
+  for(let i=1;i<=meta.max;i++){
+    const active = ticketsForSlot(sport,i)[0];
+    if(active){
+      occCount++;
+      const over = isOvertime(active, now);
+      slots.push(`<div class="slot ${over?'over':'occ'}" data-sport="${sport}" data-slot="${i}">
+        <div class="n">${meta.unit}${i}</div>
+        <div class="name">${escapeHtml(active.name)}</div>
+        <div class="st">${over? '超過中' : '〜'+fmtTime(computeEnd(active))}</div>
+      </div>`);
+    }else{
+      slots.push(`<div class="slot avail" data-sport="${sport}" data-slot="${i}">
+        <div class="n">${meta.unit}${i}</div>
+        <div class="st">空き</div>
+      </div>`);
+    }
+  }
+  return `<div class="card sportcard">
+    <h2>${meta.icon} ${sport}</h2>
+    <div class="count">空き ${meta.max-occCount} / ${meta.max}</div>
+    <div class="slotgrid">${slots.join('')}</div>
+  </div>`;
+}
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ---------- modals ---------- */
+function openNewTicketModal(sport, slot){
+  const meta = SPORTS[sport];
+  const now = new Date();
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `<div class="overlay" id="ov">
+    <div class="modal">
+      <h3>${meta.icon} ${sport}　${meta.unit}${slot} の受付</h3>
+      <div class="field"><label>利用者名</label><input id="fName" type="text" placeholder="山田 太郎"></div>
+      <div class="field"><label>利用開始時刻</label><input id="fTime" type="time" value="${fmtTime(now)}"></div>
+      <div class="field"><label>利用時間</label><input type="text" value="2時間（延長は名簿タブから1時間単位で可能）" disabled></div>
+      <div class="actions">
+        <button class="btn ghost" id="cancelBtn">キャンセル</button>
+        <button class="btn primary" id="submitBtn">受付する（発券）</button>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('cancelBtn').onclick = closeModal;
+  document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
+  document.getElementById('submitBtn').onclick = async ()=>{
+    const name = document.getElementById('fName').value.trim();
+    const timeVal = document.getElementById('fTime').value;
+    if(!name){ showToast('お名前を入力してください'); return; }
+    if(!timeVal){ showToast('開始時刻を入力してください'); return; }
+    const [hh,mm] = timeVal.split(':').map(Number);
+    const start = new Date(currentDate);
+    start.setHours(hh,mm,0,0);
+    const ticket = {
+      id: 'tk_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+      no: nextTicketNo(),
+      sport, slot, name,
+      start: start.toISOString(),
+      baseHours: 2, extensions: 0,
+      status: 'active',
+      createdAt: new Date().toISOString()
+    };
+    tickets.push(ticket);
+    const ok = await saveTickets();
+    if(ok){ showTicketModal(ticket); renderReception(); renderRoster(); }
+  };
+}
+function showTicketModal(t){
+  const meta = SPORTS[t.sport];
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `<div class="overlay" id="ov">
+    <div class="modal">
+      <div class="ticket">
+        <div class="lbl">受付番号 / TICKET</div>
+        <div class="no">${t.no}</div>
+        <div class="row"><span>種目</span><span>${meta.icon} ${t.sport}</span></div>
+        <div class="row"><span>枠</span><span>${meta.unit}${t.slot}</span></div>
+        <div class="row"><span>お名前</span><span>${escapeHtml(t.name)}</span></div>
+        <div class="row"><span>利用時間</span><span class="num">${fmtTime(new Date(t.start))} 〜 ${fmtTime(computeEnd(t))}</span></div>
+      </div>
+      <div class="actions"><button class="btn primary" id="closeTicket">閉じる</button></div>
+    </div>
+  </div>`;
+  document.getElementById('closeTicket').onclick = closeModal;
+  document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
+}
+function openOccupiedModal(sport, slot){
+  const t = ticketsForSlot(sport,slot)[0];
+  if(!t) return;
+  const meta = SPORTS[sport];
+  const over = isOvertime(t, new Date());
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `<div class="overlay" id="ov">
+    <div class="modal">
+      <h3>${meta.icon} ${sport}　${meta.unit}${slot}</h3>
+      <div class="field"><label>受付番号</label><input value="${t.no}" disabled></div>
+      <div class="field"><label>利用者名</label><input value="${escapeHtml(t.name)}" disabled></div>
+      <div class="field"><label>利用時間</label><input value="${fmtTime(new Date(t.start))} 〜 ${fmtTime(computeEnd(t))}${over?'（超過中）':''}" disabled></div>
+      <div class="actions">
+        <button class="btn ghost" id="cancelBtn">閉じる</button>
+        <button class="btn amber" id="extendBtn">延長 +1時間</button>
+        <button class="btn danger" id="endBtn">利用終了</button>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('cancelBtn').onclick = closeModal;
+  document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
+  document.getElementById('extendBtn').onclick = async ()=>{
+    t.extensions += 1;
+    const ok = await saveTickets();
+    if(ok){ showToast('1時間延長しました'); closeModal(); renderReception(); renderRoster(); }
+  };
+  document.getElementById('endBtn').onclick = async ()=>{
+    t.status = 'closed';
+    t.closedAt = new Date().toISOString();
+    const ok = await saveTickets();
+    if(ok){ showToast('利用終了にしました'); closeModal(); renderReception(); renderRoster(); }
+  };
+}
+function closeModal(){ document.getElementById('modalRoot').innerHTML=''; }
+
+document.getElementById('tab-reception').addEventListener('click', (e)=>{
+  const slot = e.target.closest('.slot');
+  if(!slot) return;
+  const sport = slot.dataset.sport, num = Number(slot.dataset.slot);
+  if(slot.classList.contains('avail')) openNewTicketModal(sport, num);
+  else openOccupiedModal(sport, num);
+});
+
+/* ---------- roster tab ---------- */
+function renderRoster(){
+  const el = document.getElementById('tab-roster');
+  const now = new Date();
+  const activeCount = tickets.filter(t=>t.status==='active').length;
+  if(tickets.length===0){
+    el.innerHTML = `<div class="toolbar"><div class="stats">本日の受付：0件</div></div>
+      <div class="empty">まだ本日の受付はありません。「受付」タブから最初の受付をしてください。</div>`;
+    return;
+  }
+  const sorted = [...tickets].sort((a,b)=> new Date(b.start)-new Date(a.start));
+  el.innerHTML = `
+    <div class="toolbar">
+      <div class="stats">本日の受付：${tickets.length}件 ／ 利用中：${activeCount}件</div>
+      <button class="btn ghost" id="clearDay">本日のデータを削除</button>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>券番号</th><th>種目</th><th>枠</th><th>利用者名</th><th>開始</th><th>終了予定</th><th>状態</th><th>操作</th></tr></thead>
+      <tbody>${sorted.map(rowHtml).join('')}</tbody>
+    </table></div>`;
+  document.getElementById('clearDay').onclick = async ()=>{
+    if(!confirm('本日の受付データをすべて削除します。よろしいですか？')) return;
+    tickets = [];
+    const ok = await saveTickets();
+    if(ok){ showToast('本日のデータを削除しました'); renderReception(); renderRoster(); }
+  };
+  el.querySelectorAll('[data-act]').forEach(btn=>{
+    btn.onclick = async ()=>{
+      const t = tickets.find(x=>x.id===btn.dataset.id);
+      if(!t) return;
+      if(btn.dataset.act==='extend') t.extensions += 1;
+      if(btn.dataset.act==='end'){ t.status='closed'; t.closedAt=new Date().toISOString(); }
+      const ok = await saveTickets();
+      if(ok){ renderReception(); renderRoster(); }
+    };
+  });
+}
+function rowHtml(t){
+  const now = new Date();
+  const over = isOvertime(t, now);
+  let badge = t.status==='closed' ? '<span class="badge closed">終了</span>' : (over?'<span class="badge over">超過</span>':'<span class="badge active">利用中</span>');
+  const meta = SPORTS[t.sport] || {icon:''};
+  const actions = t.status==='active'
+    ? `<button class="btn amber" data-act="extend" data-id="${t.id}">延長+1h</button><button class="btn danger" data-act="end" data-id="${t.id}">終了</button>`
+    : '—';
+  return `<tr>
+    <td class="num">${t.no}</td>
+    <td>${meta.icon} ${t.sport}</td>
+    <td>${t.slot}</td>
+    <td>${escapeHtml(t.name)}</td>
+    <td class="num">${fmtTime(new Date(t.start))}</td>
+    <td class="num">${fmtTime(computeEnd(t))}</td>
+    <td>${badge}</td>
+    <td>${actions}</td>
+  </tr>`;
+}
+
+/* ---------- settings tab ---------- */
+function renderSettings(){
+  const el = document.getElementById('tab-settings');
+  let rows = '';
+  for(let d=0; d<7; d++){
+    rows += `<tr><th>${WD[d]}曜日</th>`;
+    PERIODS.forEach(p=>{
+      const pair = schedule[d][p.key];
+      rows += `<td>
+        <div style="font-size:10px;color:var(--ink-soft);margin-bottom:4px;">${p.label}</div>
+        <select data-day="${d}" data-period="${p.key}" data-idx="0">${SPORT_KEYS.map(s=>`<option value="${s}" ${pair[0]===s?'selected':''}>${s}</option>`).join('')}</select>
+        <select data-day="${d}" data-period="${p.key}" data-idx="1">${SPORT_KEYS.map(s=>`<option value="${s}" ${pair[1]===s?'selected':''}>${s}</option>`).join('')}</select>
+      </td>`;
+    });
+    rows += `</tr>`;
+  }
+  el.innerHTML = `
+    <div class="card" style="margin-bottom:14px;font-size:12px;color:var(--ink-soft);">
+      曜日・時間帯ごとに実施する2種目を設定してください。設定は自動保存され、受付画面にすぐ反映されます。<br>
+      枠数の目安：卓球7／バドミントン4／バレーボール1／バスケットボール1／武道1／フリー1
+    </div>
+    <div class="schedwrap tablewrap"><table class="sched">
+      <thead><tr><th></th>${PERIODS.map(p=>`<th>${p.label}</th>`).join('')}</tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+  el.querySelectorAll('select').forEach(sel=>{
+    sel.onchange = async ()=>{
+      const day = Number(sel.dataset.day), period = sel.dataset.period, idx = Number(sel.dataset.idx);
+      const other = idx===0?1:0;
+      if(sel.value === schedule[day][period][other]){
+        showToast('同じ種目は選べません');
+        sel.value = schedule[day][period][idx];
+        return;
+      }
+      schedule[day][period][idx] = sel.value;
+      await saveSchedule();
+      showToast('保存しました');
+      renderReception();
+    };
+  });
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('nav.tabs button').forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTab = btn.dataset.tab;
+    ['reception','roster','settings'].forEach(t=>{
+      document.getElementById('tab-'+t).style.display = (t===activeTab)?'block':'none';
+    });
+  };
+});
+
+/* ---------- init ---------- */
+async function init(){
+  tickClock();
+  setInterval(tickClock, 1000);
+  setInterval(()=>{ if(activeTab==='reception') renderReception(); if(activeTab==='roster') renderRoster(); }, 20000);
+
+  document.getElementById('tab-reception').innerHTML = `<div class="empty">読み込み中…</div>`;
+  schedule = await loadSchedule();
+  tickets = await loadTickets(currentDate);
+  renderReception();
+  renderRoster();
+  renderSettings();
+}
+init();
+</script>
+</body>
+</html>
