@@ -12,6 +12,7 @@
     --amber:#F5A623; --amber-deep:#D68A0F;
     --green:#2E9E5B; --green-bg:#E6F6EC;
     --red:#E5484D; --red-bg:#FCEAEA;
+    --purple:#7C5CBF; --purple-bg:#F1ECFB;
     --gray:#8A93A6; --gray-bg:#EEF0F4;
     --bg:#F4F5F8; --surface:#FFFFFF; --line:#E1E4EA;
     --ink:#151B2B; --ink-soft:#5B6478;
@@ -31,29 +32,52 @@
   .clockbox .date{font-size:12px;opacity:.8;margin-top:4px;}
   .period-badge{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;background:rgba(245,166,35,.18);border:1px solid var(--amber);color:var(--amber);font-size:12px;font-weight:700;}
   .period-badge.off{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7);}
-  nav.tabs{display:flex;gap:4px;background:var(--surface);border-bottom:1px solid var(--line);padding:0 20px;position:sticky;top:0;z-index:5;}
-  nav.tabs button{appearance:none;border:none;background:none;padding:14px 10px;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;border-bottom:3px solid transparent;}
+  nav.tabs{display:flex;gap:2px;background:var(--surface);border-bottom:1px solid var(--line);padding:0 12px;position:sticky;top:0;z-index:5;overflow-x:auto;}
+  nav.tabs button{appearance:none;border:none;background:none;padding:14px 9px;font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-soft);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
   nav.tabs button.active{color:var(--navy);border-bottom-color:var(--amber);}
+  .admin-toggle{margin-left:auto;font-size:10.5px !important;font-weight:700;color:var(--ink-soft) !important;opacity:.65;padding:14px 8px !important;}
+  .herogrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+  @media(max-width:680px){.herogrid{grid-template-columns:1fr;}}
+  .herotile{background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#fff;border-radius:16px;padding:24px 16px;text-align:center;box-shadow:var(--shadow);}
+  .heroicon{font-size:42px;line-height:1;}
+  .herosport{font-size:16px;font-weight:900;margin:8px 0 4px;}
+  .heromsg{font-size:13px;opacity:.9;line-height:1.5;}
+  .heromsg b{color:var(--amber);font-size:17px;}
+  .actiongrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px;}
+  @media(max-width:680px){.actiongrid{grid-template-columns:1fr 1fr;}}
+  .actiontile{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:20px 10px;text-align:center;cursor:pointer;font-size:13px;font-weight:700;transition:border-color .15s,transform .1s;line-height:1.5;}
+  .actiontile:hover{border-color:var(--amber);transform:translateY(-1px);}
+  .actionicon{font-size:28px;margin-bottom:8px;}
+  .screenbar{background:linear-gradient(120deg,var(--navy),var(--navy-2));color:#fff;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px;box-shadow:var(--shadow);}
+  .screenbar .backbtn{appearance:none;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .screenbar .title{font-size:15px;font-weight:900;}
+  .screenbar .title small{display:block;font-size:11px;font-weight:400;opacity:.8;margin-top:2px;}
+  .screen-enter{animation:screenIn .28s ease;}
+  @keyframes screenIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  @media(prefers-reduced-motion:reduce){.screen-enter{animation:none;}}
   main{padding:18px 20px 0;}
   .panelgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   @media(max-width:680px){.panelgrid{grid-template-columns:1fr;}}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
-  .sportcard h2{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px;}
+  .sportcard h2{margin:0 0 2px;font-size:15px;display:flex;align-items:center;gap:8px;}
   .sportcard .count{font-size:12px;color:var(--ink-soft);margin-bottom:12px;}
-  .slotgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px;}
+  .slotgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px;}
   .slot{border-radius:10px;border:2px solid var(--line);background:#fff;padding:8px 6px;text-align:center;cursor:pointer;min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:2px;transition:transform .1s,border-color .15s;}
   .slot:hover{transform:translateY(-1px);border-color:var(--amber);}
-  .slot .n{font-family:'Space Mono',monospace;font-weight:700;font-size:16px;}
+  .slot .n{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;}
   .slot.avail{border-style:dashed;}
   .slot.avail .n{color:var(--green);}
   .slot.avail .st{font-size:10px;color:var(--green);}
   .slot.occ{background:var(--gray-bg);border-color:var(--gray);}
-  .slot.occ .name{font-size:11px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;}
-  .slot.occ .st{font-size:10px;color:var(--ink-soft);}
+  .slot.occ .name{font-size:10.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;}
+  .slot.occ .st{font-size:9.5px;color:var(--ink-soft);}
   .slot.over{background:var(--red-bg);border-color:var(--red);animation:pulse 2s ease-in-out infinite;}
   .slot.over .st{color:var(--red);font-weight:700;}
-  @media(prefers-reduced-motion:reduce){.slot.over{animation:none;}}
+  .slot.soon{background:rgba(245,166,35,.15);border-color:var(--amber);animation:pulseAmber 2s ease-in-out infinite;}
+  .slot.soon .st{color:var(--amber-deep);font-weight:700;}
+  @media(prefers-reduced-motion:reduce){.slot.over,.slot.soon{animation:none;}}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(229,72,77,.25);}50%{box-shadow:0 0 0 6px rgba(229,72,77,0);}}
+  @keyframes pulseAmber{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.3);}50%{box-shadow:0 0 0 6px rgba(245,166,35,0);}}
   .offhours{padding:40px 20px;text-align:center;color:var(--ink-soft);}
   .offhours .big{font-size:32px;margin-bottom:8px;}
   table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -63,27 +87,40 @@
   .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;}
   .badge.active{background:var(--green-bg);color:var(--green);}
   .badge.over{background:var(--red-bg);color:var(--red);}
+  .badge.soon{background:rgba(245,166,35,.18);color:var(--amber-deep);}
   .badge.closed{background:var(--gray-bg);color:var(--gray);}
+  .badge.wait{background:var(--purple-bg);color:var(--purple);}
   .btn{appearance:none;border:none;border-radius:8px;padding:6px 10px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;}
   .btn.primary{background:var(--navy);color:#fff;}
   .btn.amber{background:var(--amber);color:#3a2400;}
   .btn.ghost{background:none;border:1px solid var(--line);color:var(--ink-soft);}
   .btn.danger{background:var(--red);color:#fff;}
+  .btn.purple{background:var(--purple);color:#fff;}
   .btn+.btn{margin-left:6px;}
   .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
   .toolbar .stats{font-size:12px;color:var(--ink-soft);}
+  .zonehead{font-size:14px;font-weight:900;color:var(--navy);margin:20px 0 8px;display:flex;align-items:center;gap:6px;}
+  .zonehead:first-child{margin-top:0;}
+  .sectiontitle{font-size:14px;font-weight:900;color:var(--navy);margin:22px 0 8px;}
+  .sectiontitle:first-child{margin-top:0;}
+  .statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:6px;}
+  .stattile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:var(--shadow);}
+  .stattile .lbl{font-size:11px;color:var(--ink-soft);margin-bottom:4px;}
+  .stattile .val{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--navy);}
+  .stattile .sub{font-size:10.5px;color:var(--ink-soft);margin-top:2px;}
   /* schedule */
   .schedwrap{overflow-x:auto;}
   table.sched th,table.sched td{padding:8px;text-align:center;}
   table.sched select{font-family:inherit;font-size:12px;padding:4px;border-radius:6px;border:1px solid var(--line);}
   /* modal */
-  .overlay{position:fixed;inset:0;background:rgba(21,34,56,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50;}
-  .modal{background:#fff;border-radius:16px;max-width:380px;width:100%;padding:22px;box-shadow:var(--shadow);}
+  .overlay{position:fixed;inset:0;background:rgba(21,34,56,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50;overflow-y:auto;}
+  .modal{background:#fff;border-radius:16px;max-width:400px;width:100%;padding:22px;box-shadow:var(--shadow);margin:auto;}
   .modal h3{margin:0 0 14px;font-size:16px;}
   .field{margin-bottom:12px;}
   .field label{display:block;font-size:12px;color:var(--ink-soft);margin-bottom:4px;font-weight:700;}
   .field input,.field select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;}
-  .modal .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
+  .field .hint{font-size:10.5px;color:var(--ink-soft);margin-top:3px;}
+  .modal .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap;}
   .ticket{border:2px dashed var(--navy-3);border-radius:12px;padding:18px;text-align:center;background:linear-gradient(160deg,#fff,#F7F9FF);}
   .ticket .lbl{font-size:11px;color:var(--ink-soft);letter-spacing:.08em;}
   .ticket .no{font-family:'Space Mono',monospace;font-weight:700;font-size:30px;color:var(--navy);margin:4px 0 10px;}
@@ -91,7 +128,27 @@
   .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;box-shadow:var(--shadow);z-index:80;opacity:0;transition:opacity .25s;}
   .toast.show{opacity:1;}
   .empty{padding:30px;text-align:center;color:var(--ink-soft);font-size:13px;}
-  .footer-actions{margin-top:14px;text-align:right;}
+  .countrow{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;}
+  .countrow .lbl2{font-size:13px;font-weight:700;}
+  .countrow .lbl2 small{display:block;font-size:10px;color:var(--ink-soft);font-weight:400;}
+  .stepper{display:flex;align-items:center;gap:8px;}
+  .stepper button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:16px;font-weight:700;cursor:pointer;color:var(--navy);}
+  .stepper .val{width:22px;text-align:center;font-family:'Space Mono',monospace;font-weight:700;}
+  .totalline{font-size:12px;color:var(--ink-soft);text-align:right;margin-bottom:10px;}
+  .feeline{font-size:14px;font-weight:900;color:var(--navy);text-align:right;margin-bottom:10px;}
+  .subhead{font-size:11.5px;font-weight:700;color:var(--ink-soft);margin:10px 0 6px;}
+  .itemtile{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:14px;box-shadow:var(--shadow);cursor:pointer;text-align:center;transition:transform .1s,border-color .15s;}
+  .itemtile:hover{transform:translateY(-1px);border-color:var(--amber);}
+  .itemtile .icon{font-size:22px;}
+  .itemtile .name{font-size:12.5px;font-weight:700;margin:4px 0 2px;}
+  .itemtile .avail{font-family:'Space Mono',monospace;font-size:15px;color:var(--green);font-weight:700;}
+  .itemtile.full .avail{color:var(--red);}
+  .itemgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-bottom:10px;}
+  @media print{
+    body *{visibility:hidden;}
+    #printArea, #printArea *{visibility:visible;}
+    #printArea{position:absolute;top:0;left:0;width:100%;margin:0;box-shadow:none;border-width:3px;}
+  }
 </style>
 </head>
 <body>
@@ -101,7 +158,7 @@
     <div class="row">
       <div>
         <h1>体育館 利用受付</h1>
-        <div class="sub">種目を選んで、開始時刻とお名前を入力してください</div>
+        <div class="sub">種目を選んで受付してください</div>
         <div id="periodBadge" class="period-badge">読み込み中…</div>
       </div>
       <div class="clockbox">
@@ -111,16 +168,14 @@
     </div>
   </header>
 
-  <nav class="tabs">
-    <button data-tab="reception" class="active">受付</button>
-    <button data-tab="roster">名簿・利用状況</button>
-    <button data-tab="settings">スケジュール設定</button>
-  </nav>
+  <nav class="tabs" id="navTabs"></nav>
 
   <main>
     <section id="tab-reception"></section>
+    <section id="tab-waiting" style="display:none"></section>
+    <section id="tab-rental" style="display:none"></section>
     <section id="tab-roster" style="display:none"></section>
-    <section id="tab-settings" style="display:none"></section>
+    <section id="tab-admin" style="display:none"></section>
   </main>
 </div>
 
@@ -129,14 +184,39 @@
 
 <script>
 const SPORTS = {
-  '卓球':{max:7,unit:'卓球台',icon:'🏓'},
-  'バドミントン':{max:4,unit:'コート',icon:'🏸'},
-  'バレーボール':{max:1,unit:'コート',icon:'🏐'},
-  'バスケットボール':{max:1,unit:'コート',icon:'🏀'},
-  '武道':{max:1,unit:'フロア',icon:'🥋'},
-  'フリー':{max:1,unit:'スペース',icon:'⬜'}
+  '卓球':{max:7,unit:'卓球台',icon:'🏓', modes:['designated']},
+  'バドミントン':{max:4,unit:'コート',icon:'🏸', modes:['designated','free']},
+  'バレーボール':{max:1,unit:'コート',icon:'🏐', modes:['designated']},
+  'バスケットボール':{max:1,unit:'コート',icon:'🏀', modes:['free']},
+  '武道':{max:1,unit:'フロア',icon:'🥋', modes:['designated','free']}
 };
 const SPORT_KEYS = Object.keys(SPORTS);
+const MODE_LABEL = {designated:'種目指定', free:'フリー'};
+const ZONES = [
+  {key:'A', label:'卓球・武道', sports:['卓球','武道']},
+  {key:'B', label:'バドミントン・バレー・バスケットボール', sports:['バドミントン','バレーボール','バスケットボール']}
+];
+// 料金区分：シニア／一般／中高生／小学生以下（年齢区分・課金対象）＋ 減免対象者／介助者（無料）
+const ROW_DEFS = [
+  {key:'senior', label:'シニア', base:220, ext:140, coupon:2200, hint:'220円・延長140円・回数券販売中（2200円）'},
+  {key:'adult', label:'一般', base:280, ext:140, coupon:2800, hint:'280円・延長140円・1回分お得！回数券販売中（2800円）'},
+  {key:'teen', label:'中高生', base:140, ext:70, coupon:1400, hint:'140円・延長70円・1回分お得！回数券販売中（1400円）'},
+  {key:'child', label:'小学生以下', base:70, ext:40, coupon:900, hint:'70円・延長40円・1回分お得！回数券販売中（900円）'},
+  {key:'reduced', label:'減免対象者', base:0, ext:0, coupon:0, hint:'障害者手帳等・100%減免'},
+  {key:'assistant', label:'介助者', base:0, ext:0, coupon:0, hint:'無料'}
+];
+const AGE_KEYS = ['senior','adult','teen','child'];
+function rowDef(key){ return ROW_DEFS.find(r=>r.key===key); }
+
+const EQUIPMENT = {
+  '卓球ラケット':{max:10, icon:'🏓'},
+  '卓球ボール':{max:20, icon:'⚪'},
+  'バドミントンラケット':{max:4, icon:'🏸'},
+  'シャトル':{max:10, icon:'🏸'},
+  'バレーボール':{max:1, icon:'🏐'},
+  'バスケットボール':{max:1, icon:'🏀'}
+};
+const EQUIP_KEYS = Object.keys(EQUIPMENT);
 const WD = ['日','月','火','水','木','金','土'];
 const PERIODS = [
   {key:'9-13',startH:9,endH:13,label:'9:00–13:00'},
@@ -144,46 +224,134 @@ const PERIODS = [
   {key:'17-21',startH:17,endH:21,label:'17:00–21:00'}
 ];
 
+// 施設ルール：最低利用人数（種目×モード〔種目指定／フリー〕ごと）
+const MIN_HEADCOUNT = {
+  '卓球': {designated:2},
+  'バドミントン': {designated:2, free:4},
+  'バレーボール': {designated:6, free:6},
+  'バスケットボール': {free:5},
+  '武道': {designated:1, free:5}
+};
+function minHeadFor(sport, mode){
+  const m = MIN_HEADCOUNT[sport] || {};
+  return m[mode] || m.designated || m.free || 1;
+}
+function scheduleOptionsList(){
+  const opts = [];
+  SPORT_KEYS.forEach(sport=>{
+    SPORTS[sport].modes.forEach(mode=>{
+      opts.push({
+        sport, mode, key: sport+'|'+mode,
+        label: SPORTS[sport].modes.length>1 ? `${sport}（${MODE_LABEL[mode]}）` : sport
+      });
+    });
+  });
+  return opts;
+}
+// 施設ルール：人数に応じて必要な枠（台・コート）数（モードによらず共通）
+function requiredSlotCount(sport, headcount){
+  if(sport==='卓球'){
+    if(headcount<=3) return 1;
+    if(headcount<=5) return 2;
+    if(headcount<=7) return 3;
+    if(headcount<=9) return 4;
+    if(headcount<=11) return 5;
+    if(headcount<=13) return 6;
+    return 7;
+  }
+  if(sport==='バドミントン'){
+    return headcount>=8 ? 2 : 1;
+  }
+  return 1; // バレーボール・バスケットボール・武道は常に1枠（半面）
+}
+
 let schedule = null;
 let tickets = [];
+let waitingList = [];
+let rentals = [];
+let couponSales = [];
 let currentDate = new Date();
 let activeTab = 'reception';
+let mode = 'user'; // 'user'（利用者） | 'admin'（管理者）
+let showGrid = false; // 受付タブでスロット一覧を表示中か
+let gridMode = 'new'; // 'new'（新規受付） | 'add'（追加受付） | 'extend'（延長申込）
+let alertedTicketIds = new Set(); // 終了5分前アラートを出し済みの受付ID
+let audioCtx = null;
 
 function pad(n){return String(n).padStart(2,'0');}
 function dateKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
 function fmtTime(d){return pad(d.getHours())+':'+pad(d.getMinutes());}
 function fmtDateLabel(d){return `${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;}
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function yen(n){ return '¥'+Math.round(n).toLocaleString('ja-JP'); }
+function showToast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 1800);
+}
 
+function sm(sport, mode){ return {sport, mode}; }
 function defaultSchedule(){
-  const per = {'9-13':['卓球','バドミントン'],'13-17':['バレーボール','バスケットボール'],'17-21':['武道','フリー']};
+  const per = {
+    '9-13':[sm('卓球','designated'), sm('バドミントン','designated')],
+    '13-17':[sm('バレーボール','designated'), sm('バスケットボール','free')],
+    '17-21':[sm('武道','designated'), sm('バドミントン','free')]
+  };
   const sch = {};
-  for(let i=0;i<7;i++){ sch[i] = {'9-13':[...per['9-13']],'13-17':[...per['13-17']],'17-21':[...per['17-21']]}; }
+  for(let i=0;i<7;i++){
+    sch[i] = {
+      '9-13':per['9-13'].map(x=>({...x})),
+      '13-17':per['13-17'].map(x=>({...x})),
+      '17-21':per['17-21'].map(x=>({...x}))
+    };
+  }
+  return sch;
+}
+// 旧バージョン（種目名の文字列配列、"フリー"含む）からの自動移行
+function migrateSchedule(sch){
+  if(!sch) return defaultSchedule();
+  for(let d=0; d<7; d++){
+    if(!sch[d]) continue;
+    PERIODS.forEach(p=>{
+      const entries = sch[d][p.key];
+      if(!entries) return;
+      sch[d][p.key] = entries.map(e=>{
+        if(typeof e === 'string'){
+          if(e==='フリー' || e==='バスケットボール') return sm('バスケットボール','free');
+          const modes = (SPORTS[e] && SPORTS[e].modes) || ['designated'];
+          return sm(e, modes[0]);
+        }
+        if(!SPORTS[e.sport]) return sm('バドミントン','free');
+        const allowed = SPORTS[e.sport].modes;
+        return sm(e.sport, allowed.includes(e.mode) ? e.mode : allowed[0]);
+      });
+    });
+  }
   return sch;
 }
 
 /* このファイルはブラウザの localStorage にデータを保存します。
    同じ端末・同じブラウザで開く限りデータは保持されますが、
    別の端末やブラウザ、シークレットモードでは共有されません。 */
-async function loadSchedule(){
-  try{
-    const v = localStorage.getItem('gymapp:schedule');
-    return v ? JSON.parse(v) : defaultSchedule();
-  }catch(e){ return defaultSchedule(); }
+async function loadJSON(key, fallback){
+  try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch(e){ return fallback; }
 }
-async function saveSchedule(){
-  try{ localStorage.setItem('gymapp:schedule', JSON.stringify(schedule)); }
-  catch(e){ showToast('設定の保存に失敗しました'); }
-}
-async function loadTickets(d){
-  try{
-    const v = localStorage.getItem('gymapp:tickets:'+dateKey(d));
-    return v ? JSON.parse(v) : [];
-  }catch(e){ return []; }
-}
-async function saveTickets(){
-  try{ localStorage.setItem('gymapp:tickets:'+dateKey(currentDate), JSON.stringify(tickets)); return true; }
+async function saveJSON(key, value){
+  try{ localStorage.setItem(key, JSON.stringify(value)); return true; }
   catch(e){ showToast('保存に失敗しました。もう一度お試しください'); return false; }
 }
+async function loadSchedule(){ return migrateSchedule(await loadJSON('gymapp:schedule', defaultSchedule())); }
+async function saveSchedule(){ return saveJSON('gymapp:schedule', schedule); }
+async function loadTickets(d){ return loadJSON('gymapp:tickets:'+dateKey(d), []); }
+async function saveTickets(){ return saveJSON('gymapp:tickets:'+dateKey(currentDate), tickets); }
+async function loadWaiting(d){ return loadJSON('gymapp:waiting:'+dateKey(d), []); }
+async function saveWaiting(){ return saveJSON('gymapp:waiting:'+dateKey(currentDate), waitingList); }
+async function loadRentals(d){ return loadJSON('gymapp:rentals:'+dateKey(d), []); }
+async function saveRentals(){ return saveJSON('gymapp:rentals:'+dateKey(currentDate), rentals); }
+async function loadCouponSales(){ return loadJSON('gymapp:couponSales', []); }
+async function saveCouponSales(){ return saveJSON('gymapp:couponSales', couponSales); }
 
 function currentPeriod(now){
   const h = now.getHours() + now.getMinutes()/60;
@@ -196,30 +364,167 @@ function isOvertime(t, now){
   return t.status==='active' && now.getTime() > computeEnd(t).getTime();
 }
 function ticketsForSlot(sport, slot){
-  return tickets.filter(t=>t.sport===sport && t.slot===slot && t.status==='active');
+  return tickets.filter(t=>t.sport===sport && t.status==='active'
+    && (t.slots ? t.slots.includes(slot) : t.slot===slot));
+}
+function slotsOf(t){
+  return t.slots && t.slots.length ? t.slots : [t.slot];
+}
+function slotsLabel(t){
+  const meta = SPORTS[t.sport] || {unit:'枠'};
+  const nums = [...slotsOf(t)].sort((a,b)=>a-b);
+  return `${meta.unit}${nums.join('・')}`;
+}
+function countsOf(t){
+  return t.counts || {senior:0,adult:0,teen:0,child:0,reduced:0,assistant:0};
+}
+function couponOf(t){
+  return t.couponUsers || {senior:0,adult:0,teen:0,child:0};
+}
+function totalCount(t){
+  const c = countsOf(t);
+  return ROW_DEFS.reduce((s,r)=>s+(c[r.key]||0),0);
+}
+function countsLabel(t){
+  const c = countsOf(t);
+  const parts = ROW_DEFS.filter(r=>c[r.key]>0).map(r=>`${r.label}${c[r.key]}`);
+  return parts.join('・') || '0人';
+}
+function baseFeeOf(t){
+  const c = countsOf(t), cp = couponOf(t);
+  return AGE_KEYS.reduce((sum,k)=>{
+    const cnt = c[k]||0, coupon = cp[k]||0;
+    const cash = Math.max(cnt-coupon,0);
+    return sum + cash*rowDef(k).base;
+  },0);
+}
+function extFeeOf(t){
+  const c = countsOf(t);
+  const perExt = AGE_KEYS.reduce((sum,k)=> sum + (c[k]||0)*rowDef(k).ext, 0);
+  return perExt * (t.extensions||0);
+}
+function totalFeeOf(t){ return baseFeeOf(t) + extFeeOf(t); }
+function totalValueOf(t){
+  // 利用客に表示する金額（現金・回数券を区別せず、区分の通常単価で計算した合計）
+  const c = countsOf(t);
+  const base = AGE_KEYS.reduce((sum,k)=> sum + (c[k]||0)*rowDef(k).base, 0);
+  return base + extFeeOf(t);
+}
+function couponUseLabel(t){
+  const cp = couponOf(t);
+  const parts = AGE_KEYS.filter(k=>cp[k]>0).map(k=>`${rowDef(k).label}${cp[k]}`);
+  return parts.join('・') || 'なし';
 }
 function nextTicketNo(){
   const d = currentDate;
   const seq = tickets.length + 1;
-  return `${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(seq)===String(seq).padStart(3,'0')?String(seq).padStart(3,'0'):String(seq)}`;
+  return `${pad(d.getMonth()+1)}${pad(d.getDate())}-${String(seq).padStart(3,'0')}`;
 }
-
-function showToast(msg){
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'), 1800);
+function nextWaitingNo(){
+  return `整理${String(waitingList.length+1).padStart(3,'0')}`;
+}
+function nextRentalNo(){
+  return `レ${String(rentals.length+1).padStart(3,'0')}`;
 }
 
 /* ---------- header ---------- */
+function ensureAudioCtx(){
+  if(!audioCtx){
+    try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
+    catch(e){ audioCtx = null; }
+  }
+}
+document.addEventListener('click', ensureAudioCtx, {once:true});
+
+let cachedVoices = [];
+function loadVoices(){
+  cachedVoices = ('speechSynthesis' in window) ? window.speechSynthesis.getVoices() : [];
+}
+if('speechSynthesis' in window){
+  loadVoices();
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+}
+function pickDandyVoice(){
+  const voices = cachedVoices.length ? cachedVoices : (('speechSynthesis' in window) ? window.speechSynthesis.getVoices() : []);
+  const ja = voices.filter(v=>v.lang && v.lang.toLowerCase().startsWith('ja'));
+  const male = ja.find(v=>/male|man|otoya|ichiro|男性/i.test(v.name)) 
+    || ja.find(v=>!/female|woman|女性|kyoko|o-ren/i.test(v.name));
+  return male || ja[0] || voices[0] || null;
+}
+function playBeepFallback(){
+  ensureAudioCtx();
+  if(!audioCtx) return;
+  try{
+    for(let i=0;i<2;i++){
+      const start = audioCtx.currentTime + i*0.35;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine';
+      o.frequency.value = 880;
+      g.gain.setValueAtTime(0.0001, start);
+      g.gain.exponentialRampToValueAtTime(0.35, start+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, start+0.28);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(start); o.stop(start+0.3);
+    }
+  }catch(e){}
+}
+function playAlertSound(t){
+  const meta = SPORTS[t.sport] || {unit:'枠'};
+  const msg = `${t.sport}、${meta.unit}${t.slot}番。ご利用終了まで、残り5分です。`;
+  if(!('speechSynthesis' in window)){ playBeepFallback(); return; }
+  try{
+    const utter = new SpeechSynthesisUtterance(msg);
+    utter.lang = 'ja-JP';
+    utter.pitch = 0.55;  // 低めの声で渋く
+    utter.rate = 0.82;   // ゆっくりめでダンディに
+    utter.volume = 1;
+    const voice = pickDandyVoice();
+    if(voice) utter.voice = voice;
+    window.speechSynthesis.speak(utter);
+  }catch(e){ playBeepFallback(); }
+}
+function checkSoonAlerts(){
+  const now = new Date();
+  tickets.forEach(t=>{
+    if(t.status!=='active') return;
+    const remain = computeEnd(t).getTime() - now.getTime();
+    if(remain>0 && remain<=5*60*1000 && !alertedTicketIds.has(t.id)){
+      alertedTicketIds.add(t.id);
+      const meta = SPORTS[t.sport] || {icon:'',unit:'枠'};
+      showToast(`⏰ ${meta.icon} ${t.sport}${meta.unit}${t.slot}（${t.no}）まもなく利用終了です（残り5分）`);
+      playAlertSound(t);
+      if(activeTab==='reception') renderReception();
+      if(activeTab==='roster') renderRoster();
+    }
+  });
+}
+
+function periodEntriesFor(date, periodKey){
+  return (schedule[date.getDay()] && schedule[date.getDay()][periodKey]) || [];
+}
+function currentModeFor(sport){
+  const now = new Date();
+  const p = currentPeriod(now);
+  if(!p) return null;
+  const entry = periodEntriesFor(now, p.key).find(e=>e.sport===sport);
+  return entry ? entry.mode : null;
+}
 function tickClock(){
   const now = new Date();
   document.getElementById('clock').textContent = fmtTime(now);
   document.getElementById('dateLabel').textContent = fmtDateLabel(now);
   const p = currentPeriod(now);
   const badge = document.getElementById('periodBadge');
-  if(p){ badge.textContent = `受付中 ${p.label}`; badge.classList.remove('off'); }
-  else { badge.textContent = '受付時間外（9:00–21:00）'; badge.classList.add('off'); }
+  if(p && schedule){
+    const entries = periodEntriesFor(now, p.key);
+    const sportsLabel = entries.length ? `　現在受付中：${entries.map(e=>`${e.sport}（${MODE_LABEL[e.mode]}）`).join('・')}` : '';
+    badge.textContent = `受付時間 ${p.label}${sportsLabel}`;
+    badge.classList.remove('off');
+  } else {
+    badge.textContent = '受付時間外（9:00–21:00）';
+    badge.classList.add('off');
+  }
 }
 
 /* ---------- reception tab ---------- */
@@ -231,14 +536,60 @@ function renderReception(){
     el.innerHTML = `<div class="offhours card"><div class="big">🌙</div>受付時間外です。<br>受付は 9:00〜21:00 の間、随時行えます。</div>`;
     return;
   }
-  const daySports = (schedule[now.getDay()] && schedule[now.getDay()][p.key]) || [];
-  if(daySports.length===0){
-    el.innerHTML = `<div class="offhours card">本日この時間帯の種目が設定されていません。<br>「スケジュール設定」タブから設定してください。</div>`;
+  const entries = periodEntriesFor(now, p.key);
+  if(entries.length===0){
+    el.innerHTML = `<div class="offhours card">本日この時間帯の種目が設定されていません。</div>`;
     return;
   }
-  el.innerHTML = `<div class="panelgrid">${daySports.map(sportPanel).join('')}</div>`;
+  const daySports = entries.map(e=>e.sport);
+
+  const heroTiles = entries.map(({sport,mode})=>{
+    const meta = SPORTS[sport] || {max:1,icon:'⬜'};
+    let occ = 0;
+    for(let i=1;i<=meta.max;i++){ if(ticketsForSlot(sport,i)[0]) occ++; }
+    const avail = meta.max - occ;
+    const msg = avail>0
+      ? `ただいま${sport}（${MODE_LABEL[mode]}）は<b>${avail}枠</b>利用できます。`
+      : `ただいま${sport}（${MODE_LABEL[mode]}）は満枠です。`;
+    return `<div class="herotile">
+      <div class="heroicon">${meta.icon}</div>
+      <div class="herosport">${sport}<span style="font-size:11px;opacity:.75;">（${MODE_LABEL[mode]}）</span></div>
+      <div class="heromsg">${msg}</div>
+    </div>`;
+  }).join('');
+
+  const actionTiles = `
+    <div class="actiontile" id="actNew"><div class="actionicon">📝</div>新規で受付をする方は<br>こちら</div>
+    <div class="actiontile" id="actAdd"><div class="actionicon">➕</div>追加で受付する方は<br>こちら</div>
+    <div class="actiontile" id="actExtend"><div class="actionicon">⏱️</div>延長したい方は<br>こちら</div>
+    <div class="actiontile" id="actRental"><div class="actionicon">🎽</div>レンタルしたい方は<br>こちら</div>
+  `;
+
+  if(showGrid){
+    const titles = {new:'新規受付', add:'追加受付', extend:'延長申込'};
+    const hints = {
+      new: '空いている枠（緑色・点線の枠）をタップして受付してください。',
+      add: 'すでにご利用中の枠（グレーの枠）をタップして、人数を追加してください。',
+      extend: 'ご利用中の枠（グレーの枠）をタップして「延長 +1時間」を選んでください。'
+    };
+    el.innerHTML = `<div class="screen-enter">
+      <div class="screenbar">
+        <button class="backbtn" id="backBtn">← ホームに戻る</button>
+        <div class="title">${titles[gridMode]}<small>${hints[gridMode]}</small></div>
+      </div>
+      <div class="panelgrid">${daySports.map(sport=>sportPanel(sport, gridMode)).join('')}</div>
+    </div>`;
+    document.getElementById('backBtn').onclick = ()=>{ showGrid=false; renderReception(); };
+    return;
+  }
+
+  el.innerHTML = `<div class="screen-enter"><div class="herogrid">${heroTiles}</div><div class="actiongrid">${actionTiles}</div></div>`;
+  document.getElementById('actNew').onclick = ()=>{ showGrid=true; gridMode='new'; renderReception(); };
+  document.getElementById('actAdd').onclick = ()=>{ showGrid=true; gridMode='add'; renderReception(); };
+  document.getElementById('actExtend').onclick = ()=>{ showGrid=true; gridMode='extend'; renderReception(); };
+  document.getElementById('actRental').onclick = ()=>{ switchTab('rental'); };
 }
-function sportPanel(sport){
+function sportPanel(sport, mode){
   const meta = SPORTS[sport] || {max:1,unit:'枠',icon:'⬜'};
   const now = new Date();
   let occCount = 0;
@@ -248,35 +599,121 @@ function sportPanel(sport){
     if(active){
       occCount++;
       const over = isOvertime(active, now);
-      slots.push(`<div class="slot ${over?'over':'occ'}" data-sport="${sport}" data-slot="${i}">
+      const soon = !over && (computeEnd(active).getTime()-now.getTime()) <= 5*60*1000;
+      slots.push(`<div class="slot ${over?'over':(soon?'soon':'occ')}" data-sport="${sport}" data-slot="${i}">
         <div class="n">${meta.unit}${i}</div>
-        <div class="name">${escapeHtml(active.name)}</div>
-        <div class="st">${over? '超過中' : '〜'+fmtTime(computeEnd(active))}</div>
+        <div class="name">${escapeHtml(active.name||'')}</div>
+        <div class="st">計${totalCount(active)}人 ${over? '超過中' : (soon?'まもなく終了 〜'+fmtTime(computeEnd(active)):'〜'+fmtTime(computeEnd(active)))}</div>
       </div>`);
-    }else{
+    }else if(mode!=='extend'){
       slots.push(`<div class="slot avail" data-sport="${sport}" data-slot="${i}">
         <div class="n">${meta.unit}${i}</div>
         <div class="st">空き</div>
       </div>`);
     }
   }
+  const countLabel = mode==='extend' ? `利用中 ${occCount}件` : `空き ${meta.max-occCount} / ${meta.max}`;
+  const body = slots.length>0 ? `<div class="slotgrid">${slots.join('')}</div>` : `<div class="empty">現在ご利用中の枠はありません。</div>`;
   return `<div class="card sportcard">
     <h2>${meta.icon} ${sport}</h2>
-    <div class="count">空き ${meta.max-occCount} / ${meta.max}</div>
-    <div class="slotgrid">${slots.join('')}</div>
+    <div class="count">${countLabel}</div>
+    ${body}
   </div>`;
 }
-function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-/* ---------- modals ---------- */
-function openNewTicketModal(sport, slot){
+/* ---------- 人数区分・回数券ステッパー（共通部品） ---------- */
+function countsEditorHtml(counts){
+  return ROW_DEFS.map(r=>`
+    <div class="countrow">
+      <div class="lbl2">${r.label}<small>${r.hint}</small></div>
+      <div class="stepper">
+        <button type="button" class="stepMinus" data-key="${r.key}">−</button>
+        <span class="val" id="val_${r.key}">${counts[r.key]||0}</span>
+        <button type="button" class="stepPlus" data-key="${r.key}">＋</button>
+      </div>
+    </div>`).join('');
+}
+function bindCountsEditor(root, counts, coupon, onChange){
+  function total(){ return ROW_DEFS.reduce((s,r)=>s+(counts[r.key]||0),0); }
+  root.querySelectorAll('.stepPlus').forEach(btn=>{
+    btn.onclick = ()=>{
+      if(total() >= 15){ showToast('人数の上限は15人です'); return; }
+      const k = btn.dataset.key;
+      counts[k] = (counts[k]||0) + 1;
+      root.querySelector('#val_'+k).textContent = counts[k];
+      onChange();
+    };
+  });
+  root.querySelectorAll('.stepMinus').forEach(btn=>{
+    btn.onclick = ()=>{
+      const k = btn.dataset.key;
+      if((counts[k]||0) <= 0) return;
+      counts[k] -= 1;
+      root.querySelector('#val_'+k).textContent = counts[k];
+      if(coupon && coupon[k]!==undefined && coupon[k] > counts[k]) coupon[k] = counts[k];
+      onChange();
+    };
+  });
+}
+function couponEditorHtml(coupon){
+  return AGE_KEYS.map(k=>`
+    <div class="countrow">
+      <div class="lbl2">${rowDef(k).label}</div>
+      <div class="stepper">
+        <button type="button" class="cpMinus" data-key="${k}">−</button>
+        <span class="val" id="cpval_${k}">${coupon[k]||0}</span>
+        <button type="button" class="cpPlus" data-key="${k}">＋</button>
+      </div>
+    </div>`).join('');
+}
+function bindCouponEditor(root, counts, coupon, onChange){
+  root.querySelectorAll('.cpPlus').forEach(btn=>{
+    btn.onclick = ()=>{
+      const k = btn.dataset.key;
+      const max = counts[k]||0;
+      if((coupon[k]||0) >= max){ showToast('その区分の人数を超えて回数券利用にはできません'); return; }
+      coupon[k] = (coupon[k]||0) + 1;
+      root.querySelector('#cpval_'+k).textContent = coupon[k];
+      onChange();
+    };
+  });
+  root.querySelectorAll('.cpMinus').forEach(btn=>{
+    btn.onclick = ()=>{
+      const k = btn.dataset.key;
+      if((coupon[k]||0) <= 0) return;
+      coupon[k] -= 1;
+      root.querySelector('#cpval_'+k).textContent = coupon[k];
+      onChange();
+    };
+  });
+}
+function refreshCoupon(root, coupon){
+  AGE_KEYS.forEach(k=>{ const el=root.querySelector('#cpval_'+k); if(el) el.textContent = coupon[k]||0; });
+}
+
+/* ---------- 受付モーダル ---------- */
+function openNewTicketModal(sport, prefill){
+  prefill = prefill || {};
   const meta = SPORTS[sport];
   const now = new Date();
   const root = document.getElementById('modalRoot');
+  const counts = {senior:0,adult:0,teen:0,child:0,reduced:0,assistant:0};
+  if(prefill.counts) Object.assign(counts, prefill.counts);
+  const coupon = {senior:0,adult:0,teen:0,child:0};
+  const mode = currentModeFor(sport) || meta.modes[0];
+  const minHead = minHeadFor(sport, mode);
   root.innerHTML = `<div class="overlay" id="ov">
     <div class="modal">
-      <h3>${meta.icon} ${sport}　${meta.unit}${slot} の受付</h3>
-      <div class="field"><label>利用者名</label><input id="fName" type="text" placeholder="山田 太郎"></div>
+      <h3>${meta.icon} ${sport}（${MODE_LABEL[mode]}）の受付</h3>
+      <div class="hint" style="margin-bottom:10px;">人数に応じて${meta.unit}が自動的に割り当てられます（この時間帯は${minHead}人〜利用可能）</div>
+      ${prefill.waitingId ? `<div class="field"><div class="hint" style="color:var(--purple);font-weight:700;">🎫 整理券からのご案内です</div></div>` : ''}
+      <div class="field"><label>代表者名</label><input id="fName" type="text" placeholder="山田 太郎" value="${escapeHtml(prefill.name||'')}"></div>
+      <div class="subhead">人数区分</div>
+      <div id="countsWrap">${countsEditorHtml(counts)}</div>
+      <div class="totalline" id="totalLine">計 0人</div>
+      <div class="subhead">うち回数券を利用する人数（区分ごと）</div>
+      <div id="couponWrap">${couponEditorHtml(coupon)}</div>
+      <div class="feeline" id="feeLine">ご利用料金（概算）：¥0</div>
       <div class="field"><label>利用開始時刻</label><input id="fTime" type="time" value="${fmtTime(now)}"></div>
       <div class="field"><label>利用時間</label><input type="text" value="2時間（延長は名簿タブから1時間単位で可能）" disabled></div>
       <div class="actions">
@@ -285,46 +722,85 @@ function openNewTicketModal(sport, slot){
       </div>
     </div>
   </div>`;
+  const cWrap = document.getElementById('countsWrap');
+  const pWrap = document.getElementById('couponWrap');
+  function refresh(){
+    const total = ROW_DEFS.reduce((s,r)=>s+(counts[r.key]||0),0);
+    document.getElementById('totalLine').textContent = `計 ${total}人`;
+    refreshCoupon(pWrap, coupon);
+    const fee = AGE_KEYS.reduce((sum,k)=>sum + (counts[k]||0)*rowDef(k).base, 0);
+    document.getElementById('feeLine').textContent = `ご利用料金（概算）：${yen(fee)}`;
+  }
+  refresh();
+  bindCountsEditor(cWrap, counts, coupon, refresh);
+  bindCouponEditor(pWrap, counts, coupon, refresh);
   document.getElementById('cancelBtn').onclick = closeModal;
   document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
   document.getElementById('submitBtn').onclick = async ()=>{
     const name = document.getElementById('fName').value.trim();
+    const total = ROW_DEFS.reduce((s,r)=>s+(counts[r.key]||0),0);
     const timeVal = document.getElementById('fTime').value;
-    if(!name){ showToast('お名前を入力してください'); return; }
+    if(!name){ showToast('代表者名を入力してください'); return; }
+    if(total < 1){ showToast('人数を1人以上にしてください'); return; }
+    if(total < minHead){ showToast(`この時間帯の${sport}（${MODE_LABEL[mode]}）は最低${minHead}人からご利用いただけます。`); return; }
     if(!timeVal){ showToast('開始時刻を入力してください'); return; }
+    const needed = requiredSlotCount(sport, total);
+    const availableSlots = [];
+    for(let i=1;i<=meta.max;i++){ if(ticketsForSlot(sport,i).length===0) availableSlots.push(i); }
+    if(availableSlots.length < needed){
+      showToast(`この人数には${meta.unit}が${needed}台（面）必要ですが、現在${availableSlots.length}台（面）しか空いていません。`);
+      return;
+    }
+    const assignedSlots = availableSlots.slice(0, needed);
     const [hh,mm] = timeVal.split(':').map(Number);
     const start = new Date(currentDate);
     start.setHours(hh,mm,0,0);
     const ticket = {
       id: 'tk_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
       no: nextTicketNo(),
-      sport, slot, name,
+      sport, mode, slot: assignedSlots[0], slots: assignedSlots, name,
+      counts: {...counts},
+      couponUsers: {...coupon},
       start: start.toISOString(),
       baseHours: 2, extensions: 0,
       status: 'active',
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      fromWaitingId: prefill.waitingId || null
     };
     tickets.push(ticket);
     const ok = await saveTickets();
-    if(ok){ showTicketModal(ticket); renderReception(); renderRoster(); }
+    if(ok){
+      if(prefill.waitingId){
+        const w = waitingList.find(x=>x.id===prefill.waitingId);
+        if(w){ w.status='done'; w.ticketId=ticket.id; await saveWaiting(); }
+      }
+      showTicketModal(ticket); renderReception(); renderRoster(); renderAdmin(); renderWaiting();
+    }
   };
 }
 function showTicketModal(t){
   const meta = SPORTS[t.sport];
+  const c = countsOf(t);
+  const rows = ROW_DEFS.filter(r=>c[r.key]>0).map(r=>`<div class="row"><span>${r.label}</span><span>${c[r.key]}人</span></div>`).join('');
   const root = document.getElementById('modalRoot');
   root.innerHTML = `<div class="overlay" id="ov">
     <div class="modal">
-      <div class="ticket">
+      <div class="ticket" id="printArea">
         <div class="lbl">受付番号 / TICKET</div>
         <div class="no">${t.no}</div>
         <div class="row"><span>種目</span><span>${meta.icon} ${t.sport}</span></div>
-        <div class="row"><span>枠</span><span>${meta.unit}${t.slot}</span></div>
-        <div class="row"><span>お名前</span><span>${escapeHtml(t.name)}</span></div>
+        <div class="row"><span>枠</span><span>${slotsLabel(t)}</span></div>
+        <div class="row"><span>代表者名</span><span>${escapeHtml(t.name)}</span></div>
+        ${rows}
+        <div class="row"><span>合計人数</span><span>${totalCount(t)}人</span></div>
+        <div class="row"><span>回数券利用</span><span>${couponUseLabel(t)}</span></div>
+        <div class="row"><span>ご利用料金</span><span>${yen(totalValueOf(t))}</span></div>
         <div class="row"><span>利用時間</span><span class="num">${fmtTime(new Date(t.start))} 〜 ${fmtTime(computeEnd(t))}</span></div>
       </div>
-      <div class="actions"><button class="btn primary" id="closeTicket">閉じる</button></div>
+      <div class="actions"><button class="btn ghost" id="printTicketBtn">🖨️ 印刷する</button><button class="btn primary" id="closeTicket">閉じる</button></div>
     </div>
   </div>`;
+  document.getElementById('printTicketBtn').onclick = ()=> window.print();
   document.getElementById('closeTicket').onclick = closeModal;
   document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
 }
@@ -333,32 +809,85 @@ function openOccupiedModal(sport, slot){
   if(!t) return;
   const meta = SPORTS[sport];
   const over = isOvertime(t, new Date());
+  const counts = {...countsOf(t)};
+  const coupon = {...couponOf(t)};
+  const mode = t.mode || currentModeFor(sport) || meta.modes[0];
+  const minHead = minHeadFor(sport, mode);
   const root = document.getElementById('modalRoot');
   root.innerHTML = `<div class="overlay" id="ov">
     <div class="modal">
-      <h3>${meta.icon} ${sport}　${meta.unit}${slot}</h3>
+      <h3>${meta.icon} ${sport}（${MODE_LABEL[mode]}）　${slotsLabel(t)}</h3>
       <div class="field"><label>受付番号</label><input value="${t.no}" disabled></div>
-      <div class="field"><label>利用者名</label><input value="${escapeHtml(t.name)}" disabled></div>
+      <div class="field"><label>代表者名</label><input value="${escapeHtml(t.name||'')}" disabled></div>
       <div class="field"><label>利用時間</label><input value="${fmtTime(new Date(t.start))} 〜 ${fmtTime(computeEnd(t))}${over?'（超過中）':''}" disabled></div>
+      <div class="subhead">人数区分（あとから追加できます）</div>
+      <div id="countsWrap">${countsEditorHtml(counts)}</div>
+      <div class="totalline" id="totalLine">計 ${totalCount(t)}人</div>
+      <div class="hint" style="margin-bottom:10px;">人数が増えて必要な${meta.unit}数が増える場合、空きがあれば自動的に追加されます（${sport}は${minHead}人〜）</div>
+      <div class="subhead">うち回数券を利用する人数（区分ごと）</div>
+      <div id="couponWrap">${couponEditorHtml(coupon)}</div>
+      <div class="feeline" id="feeLine">合計金額（概算・延長込み）：${yen(0)}</div>
       <div class="actions">
         <button class="btn ghost" id="cancelBtn">閉じる</button>
+        <button class="btn primary" id="saveCountsBtn">人数を更新</button>
         <button class="btn amber" id="extendBtn">延長 +1時間</button>
         <button class="btn danger" id="endBtn">利用終了</button>
       </div>
     </div>
   </div>`;
+  const cWrap = document.getElementById('countsWrap');
+  const pWrap = document.getElementById('couponWrap');
+  function refresh(){
+    const total = ROW_DEFS.reduce((s,r)=>s+(counts[r.key]||0),0);
+    document.getElementById('totalLine').textContent = `計 ${total}人`;
+    refreshCoupon(pWrap, coupon);
+    const tmp = {counts, couponUsers:coupon, extensions:t.extensions};
+    document.getElementById('feeLine').textContent = `ご利用料金（概算・延長込み）：${yen(totalValueOf(tmp))}`;
+  }
+  bindCountsEditor(cWrap, counts, coupon, refresh);
+  bindCouponEditor(pWrap, counts, coupon, refresh);
+  refresh();
   document.getElementById('cancelBtn').onclick = closeModal;
   document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
-  document.getElementById('extendBtn').onclick = async ()=>{
-    t.extensions += 1;
+  document.getElementById('saveCountsBtn').onclick = async ()=>{
+    const total = ROW_DEFS.reduce((s,r)=>s+(counts[r.key]||0),0);
+    if(total < 1){ showToast('人数を1人以上にしてください'); return; }
+    if(total < minHead){ showToast(`この時間帯の${sport}（${MODE_LABEL[mode]}）は最低${minHead}人からご利用いただけます。`); return; }
+    const needed = requiredSlotCount(sport, total);
+    const currentSlots = slotsOf(t);
+    if(needed > currentSlots.length){
+      const otherOccupied = new Set();
+      tickets.forEach(x=>{ if(x.id!==t.id && x.status==='active' && x.sport===sport) slotsOf(x).forEach(n=>otherOccupied.add(n)); });
+      const freeSlots = [];
+      for(let i=1;i<=meta.max;i++){ if(!currentSlots.includes(i) && !otherOccupied.has(i)) freeSlots.push(i); }
+      const need = needed - currentSlots.length;
+      if(freeSlots.length < need){
+        showToast(`この人数には${meta.unit}があと${need}台（面）必要ですが、空きが足りません。`);
+        return;
+      }
+      t.slots = [...currentSlots, ...freeSlots.slice(0, need)];
+      t.slot = t.slots[0];
+    }
+    t.counts = {...counts};
+    t.couponUsers = {...coupon};
     const ok = await saveTickets();
-    if(ok){ showToast('1時間延長しました'); closeModal(); renderReception(); renderRoster(); }
+    if(ok){ showToast('人数を更新しました'); closeModal(); renderReception(); renderRoster(); renderAdmin(); }
+  };
+  document.getElementById('extendBtn').onclick = async ()=>{
+    if(waitingList.some(w=>w.status==='waiting')){
+      showToast('次の利用申込みが入っているため延長できません。');
+      return;
+    }
+    t.extensions += 1;
+    alertedTicketIds.delete(t.id);
+    const ok = await saveTickets();
+    if(ok){ showToast('1時間延長しました'); closeModal(); renderReception(); renderRoster(); renderAdmin(); }
   };
   document.getElementById('endBtn').onclick = async ()=>{
     t.status = 'closed';
     t.closedAt = new Date().toISOString();
     const ok = await saveTickets();
-    if(ok){ showToast('利用終了にしました'); closeModal(); renderReception(); renderRoster(); }
+    if(ok){ showToast('利用終了にしました'); closeModal(); renderReception(); renderRoster(); renderAdmin(); }
   };
 }
 function closeModal(){ document.getElementById('modalRoot').innerHTML=''; }
@@ -367,135 +896,694 @@ document.getElementById('tab-reception').addEventListener('click', (e)=>{
   const slot = e.target.closest('.slot');
   if(!slot) return;
   const sport = slot.dataset.sport, num = Number(slot.dataset.slot);
-  if(slot.classList.contains('avail')) openNewTicketModal(sport, num);
+  if(slot.classList.contains('avail')) openNewTicketModal(sport);
   else openOccupiedModal(sport, num);
 });
 
-/* ---------- roster tab ---------- */
+/* ---------- 整理券タブ ---------- */
+function earliestFreeTime(sport){
+  const meta = SPORTS[sport];
+  if(!meta) return new Date();
+  let anyAvail = false;
+  let minEnd = null;
+  for(let i=1;i<=meta.max;i++){
+    const t = ticketsForSlot(sport,i)[0];
+    if(!t){ anyAvail = true; }
+    else{
+      const end = computeEnd(t);
+      if(!minEnd || end<minEnd) minEnd = end;
+    }
+  }
+  if(anyAvail || !minEnd) return new Date();
+  return minEnd;
+}
+function renderWaiting(){
+  const el = document.getElementById('tab-waiting');
+  const waiting = waitingList.filter(w=>w.status==='waiting').sort((a,b)=> a.desiredTime.localeCompare(b.desiredTime));
+  const done = waitingList.filter(w=>w.status==='done').sort((a,b)=> new Date(b.issuedAt)-new Date(a.issuedAt));
+  const cancelled = waitingList.filter(w=>w.status==='cancelled').sort((a,b)=> new Date(b.cancelledAt)-new Date(a.cancelledAt));
+  const now = new Date();
+  const p = currentPeriod(now);
+  const entries = p ? periodEntriesFor(now, p.key) : [];
+  const sportList = entries.length ? entries.map(e=>e.sport) : SPORT_KEYS;
+  const sportOptions = sportList.map(s=>`<option value="${s}">${SPORTS[s] ? SPORTS[s].icon+' ' : ''}${s}</option>`).join('');
+  const initialTime = fmtTime(earliestFreeTime(sportList[0]));
+  el.innerHTML = `
+    <div class="card" style="margin-bottom:16px;">
+      <h2 style="margin:0 0 12px;font-size:15px;">🎫 整理券を発行</h2>
+      <div class="field"><label>ご希望の種目</label><select id="wSport">${sportOptions}</select></div>
+      <div class="field"><label>利用開始予定時間</label><input id="wTime" type="time" value="${initialTime}">
+        <div class="hint" id="wTimeHint">その種目が最も早く空く予定の時間を自動で入力しています（変更も可能です）</div></div>
+      <div class="field"><label>代表者名</label><input id="wName" type="text" placeholder="山田 太郎"></div>
+      <div class="field"><label>人数</label><input id="wCount" type="number" min="1" max="15" value="1"></div>
+      <button class="btn primary" id="issueBtn">整理券を発行する</button>
+    </div>
+    <div class="sectiontitle">待機中（${waiting.length}件）</div>
+    ${waiting.length===0 ? '<div class="empty">現在、待機中の整理券はありません。</div>' : `
+    <div class="tablewrap"><table>
+      <thead><tr><th>整理券番号</th><th>種目</th><th>代表者名</th><th>人数</th><th>利用開始予定</th><th>操作</th></tr></thead>
+      <tbody>${waiting.map(w=>`<tr>
+        <td class="num">${w.no}</td>
+        <td>${SPORTS[w.sport] ? SPORTS[w.sport].icon+' ' : ''}${escapeHtml(w.sport||'')}</td>
+        <td>${escapeHtml(w.name)}</td>
+        <td>${w.count}人</td>
+        <td class="num">${w.desiredTime}</td>
+        <td><button class="btn purple" data-assign="${w.id}">枠へ案内する</button><button class="btn ghost" data-cancel="${w.id}">キャンセル</button></td>
+      </tr>`).join('')}</tbody>
+    </table></div>`}
+    ${done.length>0 ? `
+    <div class="sectiontitle">案内済み（${done.length}件）</div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>整理券番号</th><th>種目</th><th>代表者名</th><th>人数</th><th>利用開始予定</th><th>状態</th></tr></thead>
+      <tbody>${done.map(w=>`<tr>
+        <td class="num">${w.no}</td>
+        <td>${SPORTS[w.sport] ? SPORTS[w.sport].icon+' ' : ''}${escapeHtml(w.sport||'')}</td>
+        <td>${escapeHtml(w.name)}</td><td>${w.count}人</td>
+        <td class="num">${w.desiredTime}</td><td><span class="badge closed">案内済み</span></td>
+      </tr>`).join('')}</tbody>
+    </table></div>` : ''}
+    ${cancelled.length>0 ? `
+    <div class="sectiontitle">キャンセル済み（${cancelled.length}件）</div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>整理券番号</th><th>種目</th><th>代表者名</th><th>人数</th><th>利用開始予定</th><th>状態</th></tr></thead>
+      <tbody>${cancelled.map(w=>`<tr>
+        <td class="num">${w.no}</td>
+        <td>${SPORTS[w.sport] ? SPORTS[w.sport].icon+' ' : ''}${escapeHtml(w.sport||'')}</td>
+        <td>${escapeHtml(w.name)}</td><td>${w.count}人</td>
+        <td class="num">${w.desiredTime}</td><td><span class="badge closed">キャンセル済み</span></td>
+      </tr>`).join('')}</tbody>
+    </table></div>` : ''}
+  `;
+  document.getElementById('wSport').addEventListener('change', (e)=>{
+    document.getElementById('wTime').value = fmtTime(earliestFreeTime(e.target.value));
+  });
+  document.getElementById('issueBtn').onclick = async ()=>{
+    const sport = document.getElementById('wSport').value;
+    const name = document.getElementById('wName').value.trim();
+    const count = Number(document.getElementById('wCount').value);
+    const time = document.getElementById('wTime').value;
+    if(!sport){ showToast('種目を選択してください'); return; }
+    if(!name){ showToast('代表者名を入力してください'); return; }
+    if(!count || count<1 || count>15){ showToast('人数は1〜15人で入力してください'); return; }
+    if(!time){ showToast('利用開始予定時間を入力してください'); return; }
+    const w = {
+      id:'wt_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+      no: nextWaitingNo(), sport, name, count, desiredTime: time,
+      issuedAt: new Date().toISOString(), status:'waiting'
+    };
+    waitingList.push(w);
+    const ok = await saveWaiting();
+    if(ok){ showWaitingTicketModal(w); renderWaiting(); renderAdmin(); }
+  };
+  el.querySelectorAll('[data-assign]').forEach(btn=>{
+    btn.onclick = ()=>{
+      const w = waitingList.find(x=>x.id===btn.dataset.assign);
+      if(!w) return;
+      openWaitingAssignModal(w);
+    };
+  });
+  el.querySelectorAll('[data-cancel]').forEach(btn=>{
+    btn.onclick = async ()=>{
+      const w = waitingList.find(x=>x.id===btn.dataset.cancel);
+      if(!w) return;
+      if(!confirm(`整理券 ${w.no}（${w.name}様）をキャンセルします。よろしいですか？`)) return;
+      w.status = 'cancelled';
+      w.cancelledAt = new Date().toISOString();
+      const ok = await saveWaiting();
+      if(ok){ showToast('整理券をキャンセルしました'); renderWaiting(); renderAdmin(); }
+    };
+  });
+}
+function openWaitingAssignModal(w){
+  openNewTicketModal(w.sport, {name:w.name, counts:{adult:w.count}, waitingId:w.id});
+}
+function showWaitingTicketModal(w){
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `<div class="overlay" id="ov">
+    <div class="modal">
+      <div class="ticket" id="printArea">
+        <div class="lbl">整理券 / WAITING</div>
+        <div class="no">${w.no}</div>
+        <div class="row"><span>種目</span><span>${SPORTS[w.sport] ? SPORTS[w.sport].icon+' ' : ''}${escapeHtml(w.sport||'')}</span></div>
+        <div class="row"><span>代表者名</span><span>${escapeHtml(w.name)}</span></div>
+        <div class="row"><span>人数</span><span>${w.count}人</span></div>
+        <div class="row"><span>利用開始予定</span><span class="num">${w.desiredTime}</span></div>
+      </div>
+      <div class="actions"><button class="btn ghost" id="printTicketBtn">🖨️ 印刷する</button><button class="btn primary" id="closeTicket">閉じる</button></div>
+    </div>
+  </div>`;
+  document.getElementById('printTicketBtn').onclick = ()=> window.print();
+  document.getElementById('closeTicket').onclick = closeModal;
+  document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
+}
+
+/* ---------- レンタルタブ ---------- */
+function rentedQty(item){
+  return rentals.filter(r=>r.item===item && r.status==='out').reduce((s,r)=>s+r.qty,0);
+}
+function ticketLabelFor(ticketId){
+  const t = tickets.find(x=>x.id===ticketId);
+  if(!t) return '（受付情報なし）';
+  const meta = SPORTS[t.sport] || {icon:'',unit:'枠'};
+  return `${meta.icon} ${t.sport} ${slotsLabel(t)}（${t.name||'代表者未設定'}）`;
+}
+function renderRental(){
+  const el = document.getElementById('tab-rental');
+  const tiles = EQUIP_KEYS.map(item=>{
+    const meta = EQUIPMENT[item];
+    const out = rentedQty(item);
+    const avail = meta.max - out;
+    return `<div class="itemtile ${avail<=0?'full':''}" data-item="${item}">
+      <div class="icon">${meta.icon}</div>
+      <div class="name">${item}</div>
+      <div class="avail">${avail}/${meta.max}</div>
+    </div>`;
+  }).join('');
+  const outList = rentals.filter(r=>r.status==='out').sort((a,b)=> new Date(a.rentedAt)-new Date(b.rentedAt));
+  el.innerHTML = `
+    <div class="sectiontitle">貸出する用具を選んでください</div>
+    <div class="itemgrid">${tiles}</div>
+    <div class="sectiontitle">貸出中（${outList.length}件）</div>
+    ${outList.length===0 ? '<div class="empty">現在、貸出中の用具はありません。</div>' : `
+    <div class="tablewrap"><table>
+      <thead><tr><th>番号</th><th>品目</th><th>数量</th><th>紐付く受付枠</th><th>貸出時刻</th><th>操作</th></tr></thead>
+      <tbody>${outList.map(r=>`<tr>
+        <td class="num">${r.no}</td><td>${EQUIPMENT[r.item].icon} ${r.item}</td><td>${r.qty}</td>
+        <td>${escapeHtml(ticketLabelFor(r.ticketId))}</td><td class="num">${fmtTime(new Date(r.rentedAt))}</td>
+        <td><button class="btn danger" data-return="${r.id}">返却</button></td>
+      </tr>`).join('')}</tbody>
+    </table></div>`}
+  `;
+  el.querySelectorAll('.itemtile').forEach(tile=>{
+    tile.onclick = ()=>{
+      if(tile.classList.contains('full')){ showToast('この用具は現在貸出できる数がありません'); return; }
+      openRentalModal(tile.dataset.item);
+    };
+  });
+  el.querySelectorAll('[data-return]').forEach(btn=>{
+    btn.onclick = async ()=>{
+      const r = rentals.find(x=>x.id===btn.dataset.return);
+      if(!r) return;
+      r.status='returned';
+      r.returnedAt = new Date().toISOString();
+      const ok = await saveRentals();
+      if(ok){ showToast('返却を記録しました'); renderRental(); renderAdmin(); }
+    };
+  });
+}
+function openRentalModal(item){
+  const meta = EQUIPMENT[item];
+  const avail = meta.max - rentedQty(item);
+  const activeTickets = tickets.filter(t=>t.status==='active');
+  const root = document.getElementById('modalRoot');
+  if(activeTickets.length===0){
+    root.innerHTML = `<div class="overlay" id="ov">
+      <div class="modal">
+        <h3>${meta.icon} ${item} の貸出</h3>
+        <div class="empty">現在受付中の枠がありません。先に「受付」タブで受付を行ってから貸し出してください。</div>
+        <div class="actions"><button class="btn ghost" id="cancelBtn">閉じる</button></div>
+      </div>
+    </div>`;
+    document.getElementById('cancelBtn').onclick = closeModal;
+    document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
+    return;
+  }
+  const options = activeTickets.map(t=>{
+    const m = SPORTS[t.sport];
+    return `<option value="${t.id}">${m.icon} ${t.sport} ${m.unit}${t.slot}（${escapeHtml(t.name||'代表者未設定')}・計${totalCount(t)}人）</option>`;
+  }).join('');
+  root.innerHTML = `<div class="overlay" id="ov">
+    <div class="modal">
+      <h3>${meta.icon} ${item} の貸出</h3>
+      <div class="field"><label>紐付ける受付枠</label>
+        <select id="rTicket">${options}</select></div>
+      <div class="field"><label>数量（残り ${avail} ${item.includes('ボール')||item.includes('シャトル')?'個':'本・個'}）</label>
+        <input id="rQty" type="number" min="1" max="${avail}" value="1"></div>
+      <div class="actions">
+        <button class="btn ghost" id="cancelBtn">キャンセル</button>
+        <button class="btn primary" id="submitBtn">貸し出す</button>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('cancelBtn').onclick = closeModal;
+  document.getElementById('ov').onclick = (e)=>{ if(e.target.id==='ov') closeModal(); };
+  document.getElementById('submitBtn').onclick = async ()=>{
+    const ticketId = document.getElementById('rTicket').value;
+    const qty = Number(document.getElementById('rQty').value);
+    if(!qty || qty<1){ showToast('数量を入力してください'); return; }
+    if(qty > avail){ showToast('その数量は貸し出せません（残り'+avail+'）'); return; }
+    const r = {
+      id:'rt_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+      no: nextRentalNo(), item, qty, ticketId,
+      rentedAt: new Date().toISOString(), status:'out'
+    };
+    rentals.push(r);
+    const ok = await saveRentals();
+    if(ok){ showToast('貸出を記録しました'); closeModal(); renderRental(); renderAdmin(); }
+  };
+}
+
+/* ---------- 名簿・状況タブ（ゾーン別、終了が近い順） ---------- */
 function renderRoster(){
   const el = document.getElementById('tab-roster');
-  const now = new Date();
   const activeCount = tickets.filter(t=>t.status==='active').length;
   if(tickets.length===0){
     el.innerHTML = `<div class="toolbar"><div class="stats">本日の受付：0件</div></div>
       <div class="empty">まだ本日の受付はありません。「受付」タブから最初の受付をしてください。</div>`;
     return;
   }
-  const sorted = [...tickets].sort((a,b)=> new Date(b.start)-new Date(a.start));
-  el.innerHTML = `
+  let html = `
     <div class="toolbar">
       <div class="stats">本日の受付：${tickets.length}件 ／ 利用中：${activeCount}件</div>
       <button class="btn ghost" id="clearDay">本日のデータを削除</button>
-    </div>
-    <div class="tablewrap"><table>
-      <thead><tr><th>券番号</th><th>種目</th><th>枠</th><th>利用者名</th><th>開始</th><th>終了予定</th><th>状態</th><th>操作</th></tr></thead>
-      <tbody>${sorted.map(rowHtml).join('')}</tbody>
+    </div>`;
+  ZONES.forEach(zone=>{
+    const zoneTickets = tickets.filter(t=>zone.sports.includes(t.sport));
+    html += `<div class="zonehead">${zone.label}</div>`;
+    if(zoneTickets.length===0){
+      html += `<div class="empty">このゾーンの受付はまだありません。</div>`;
+      return;
+    }
+    const active = zoneTickets.filter(t=>t.status==='active').sort((a,b)=>computeEnd(a)-computeEnd(b));
+    const closed = zoneTickets.filter(t=>t.status==='closed').sort((a,b)=> new Date(b.start)-new Date(a.start));
+    html += `<div class="tablewrap"><table>
+      <thead><tr><th>開始</th><th>終了予定</th><th>券番号</th><th>種目</th><th>枠</th><th>代表者名</th><th>人数内訳</th><th>状態</th><th>貸出用具</th><th>操作</th><th>金額（概算）</th></tr></thead>
+      <tbody>${[...active,...closed].map(rowHtml).join('')}</tbody>
     </table></div>`;
+  });
+  el.innerHTML = html;
   document.getElementById('clearDay').onclick = async ()=>{
     if(!confirm('本日の受付データをすべて削除します。よろしいですか？')) return;
     tickets = [];
     const ok = await saveTickets();
-    if(ok){ showToast('本日のデータを削除しました'); renderReception(); renderRoster(); }
+    if(ok){ showToast('本日のデータを削除しました'); renderReception(); renderRoster(); renderAdmin(); }
   };
   el.querySelectorAll('[data-act]').forEach(btn=>{
     btn.onclick = async ()=>{
       const t = tickets.find(x=>x.id===btn.dataset.id);
       if(!t) return;
-      if(btn.dataset.act==='extend') t.extensions += 1;
+      if(btn.dataset.act==='extend'){
+        if(waitingList.some(w=>w.status==='waiting')){
+          showToast('次の利用申込みが入っているため延長できません。');
+          return;
+        }
+        t.extensions += 1;
+        alertedTicketIds.delete(t.id);
+      }
       if(btn.dataset.act==='end'){ t.status='closed'; t.closedAt=new Date().toISOString(); }
       const ok = await saveTickets();
-      if(ok){ renderReception(); renderRoster(); }
+      if(ok){ renderReception(); renderRoster(); renderAdmin(); }
     };
   });
+}
+function ticketRentalsLabel(ticketId){
+  const list = rentals.filter(r=>r.ticketId===ticketId);
+  if(list.length===0) return '—';
+  return list.map(r=>`${r.item}×${r.qty}${r.status==='out'?'':'（返却済）'}`).join('、');
 }
 function rowHtml(t){
   const now = new Date();
   const over = isOvertime(t, now);
-  let badge = t.status==='closed' ? '<span class="badge closed">終了</span>' : (over?'<span class="badge over">超過</span>':'<span class="badge active">利用中</span>');
+  const soon = t.status==='active' && !over && (computeEnd(t).getTime()-now.getTime()) <= 5*60*1000;
+  let badge = t.status==='closed' ? '<span class="badge closed">終了</span>'
+    : over ? '<span class="badge over">超過</span>'
+    : soon ? '<span class="badge soon">まもなく終了</span>'
+    : '<span class="badge active">利用中</span>';
   const meta = SPORTS[t.sport] || {icon:''};
   const actions = t.status==='active'
     ? `<button class="btn amber" data-act="extend" data-id="${t.id}">延長+1h</button><button class="btn danger" data-act="end" data-id="${t.id}">終了</button>`
     : '—';
   return `<tr>
-    <td class="num">${t.no}</td>
-    <td>${meta.icon} ${t.sport}</td>
-    <td>${t.slot}</td>
-    <td>${escapeHtml(t.name)}</td>
     <td class="num">${fmtTime(new Date(t.start))}</td>
     <td class="num">${fmtTime(computeEnd(t))}</td>
+    <td class="num">${t.no}</td>
+    <td>${meta.icon} ${t.sport}</td>
+    <td>${slotsOf(t).join('・')}</td>
+    <td>${escapeHtml(t.name||'')}</td>
+    <td>${escapeHtml(countsLabel(t))}（計${totalCount(t)}人）</td>
     <td>${badge}</td>
+    <td>${escapeHtml(ticketRentalsLabel(t.id))}</td>
     <td>${actions}</td>
+    <td class="num">${yen(totalValueOf(t))}</td>
   </tr>`;
 }
 
-/* ---------- settings tab ---------- */
-function renderSettings(){
-  const el = document.getElementById('tab-settings');
+/* ---------- 管理タブ ---------- */
+/* ---------- CSV出力 ---------- */
+function csvEscape(v){
+  const s = (v===null || v===undefined) ? '' : String(v);
+  return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+}
+function toCSV(rows){
+  return rows.map(r=>r.map(csvEscape).join(',')).join('\r\n');
+}
+function downloadCSV(filename, rows){
+  const csv = '\uFEFF' + toCSV(rows);
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
+function exportSummaryCSV(data){
+  const rows = [['項目','値']];
+  rows.push(['受付件数', data.totalTickets]);
+  rows.push(['合計利用人数', data.totalPeople]);
+  rows.push(['基本料金合計（当日支払分）', data.baseFeeTotal]);
+  rows.push(['延長料金合計（当日支払分）', data.extFeeTotal]);
+  rows.push(['当日支払売上合計', data.cashTotal]);
+  rows.push(['当日支払利用者数', data.cashUsers]);
+  rows.push(['回数券利用者数', data.couponUsersTotal]);
+  ROW_DEFS.forEach(r=> rows.push([`区分別利用者数：${r.label}`, data.catTotals[r.key]]));
+  AGE_KEYS.forEach(k=> rows.push([`回数券利用人数：${rowDef(k).label}`, data.couponUseTotals[k]]));
+  data.bySport.forEach(x=> rows.push([`種目別受付件数：${x.sport}`, x.count]));
+  data.bySport.forEach(x=> rows.push([`種目別利用人数：${x.sport}`, x.people]));
+  rows.push(['整理券発行数', data.waitTotal]);
+  rows.push(['整理券待機中', data.waitActive]);
+  rows.push(['整理券キャンセル', data.waitCancelled]);
+  rows.push(['レンタル本日貸出件数', data.rentalTodayCount]);
+  rows.push(['レンタル現在貸出中数量', data.rentalOutCount]);
+  rows.push(['回数券購入冊数（累計）', data.couponBooksSold]);
+  rows.push(['回数券購入金額（累計）', data.couponSalesTotal]);
+  downloadCSV(`集計サマリー_${dateKey(currentDate)}.csv`, rows);
+}
+function exportTicketsCSV(){
+  const rows = [['券番号','種目','モード','枠','代表者名','シニア','一般','中高生','小学生以下','減免対象者','介助者','合計人数','回数券利用（シニア）','回数券利用（一般）','回数券利用（中高生）','回数券利用（小学生以下）','開始時刻','終了予定','延長回数','状態','ご利用料金（概算）']];
+  tickets.forEach(t=>{
+    const c = countsOf(t), cp = couponOf(t);
+    rows.push([t.no, t.sport, t.mode?MODE_LABEL[t.mode]:'', slotsOf(t).join('・'), t.name||'',
+      c.senior,c.adult,c.teen,c.child,c.reduced,c.assistant, totalCount(t),
+      cp.senior,cp.adult,cp.teen,cp.child,
+      fmtTime(new Date(t.start)), fmtTime(computeEnd(t)), t.extensions, t.status==='closed'?'終了':'利用中',
+      totalValueOf(t)]);
+  });
+  downloadCSV(`受付データ_${dateKey(currentDate)}.csv`, rows);
+}
+function exportWaitingCSV(){
+  const rows = [['整理券番号','種目','代表者名','人数','利用開始予定','状態']];
+  waitingList.forEach(w=>{
+    rows.push([w.no, w.sport||'', w.name, w.count, w.desiredTime,
+      w.status==='waiting'?'待機中':w.status==='done'?'案内済み':'キャンセル済み']);
+  });
+  downloadCSV(`整理券データ_${dateKey(currentDate)}.csv`, rows);
+}
+function exportRentalsCSV(){
+  const rows = [['番号','品目','数量','紐付く受付枠','貸出時刻','状態']];
+  rentals.forEach(r=>{
+    rows.push([r.no, r.item, r.qty, ticketLabelFor(r.ticketId), fmtTime(new Date(r.rentedAt)), r.status==='out'?'貸出中':'返却済み']);
+  });
+  downloadCSV(`レンタルデータ_${dateKey(currentDate)}.csv`, rows);
+}
+function exportCouponSalesCSV(){
+  const rows = [['日時','区分','冊数','金額','通し番号']];
+  couponSales.forEach(r=>{
+    rows.push([fmtTime(new Date(r.soldAt)), rowDef(r.type)?rowDef(r.type).label:r.type, r.count, r.amount, r.serial]);
+  });
+  downloadCSV('回数券束売りデータ.csv', rows);
+}
+
+function renderAdmin(){
+  const el = document.getElementById('tab-admin');
+  const totalTickets = tickets.length;
+  const totalPeople = tickets.reduce((s,t)=>s+totalCount(t),0);
+  const catTotals = {};
+  ROW_DEFS.forEach(r=>{ catTotals[r.key] = tickets.reduce((s,t)=> s+(countsOf(t)[r.key]||0), 0); });
+  const couponUseTotals = {};
+  AGE_KEYS.forEach(k=>{ couponUseTotals[k] = tickets.reduce((s,t)=> s+(couponOf(t)[k]||0), 0); });
+  const baseFeeTotal = tickets.reduce((s,t)=>s+baseFeeOf(t),0);
+  const extFeeTotal = tickets.reduce((s,t)=>s+extFeeOf(t),0);
+  const cashTotal = baseFeeTotal + extFeeTotal;
+  const waitTotal = waitingList.length;
+  const waitActive = waitingList.filter(w=>w.status==='waiting').length;
+  const waitCancelled = waitingList.filter(w=>w.status==='cancelled').length;
+  const rentalOutCount = rentals.filter(r=>r.status==='out').reduce((s,r)=>s+r.qty,0);
+  const rentalTodayCount = rentals.length;
+
+  const bySport = SPORT_KEYS.map(sport=>{
+    const list = tickets.filter(t=>t.sport===sport);
+    return {sport, count:list.length, people:list.reduce((s,t)=>s+totalCount(t),0)};
+  }).filter(x=>x.count>0);
+
+  const couponRows = [...couponSales].sort((a,b)=> new Date(b.soldAt)-new Date(a.soldAt));
+  const couponSalesTotal = couponSales.reduce((s,r)=>s+r.amount,0);
+  const couponBooksSold = couponSales.reduce((s,r)=>s+r.count,0);
+  const couponUsersTotal = AGE_KEYS.reduce((s,k)=>s+couponUseTotals[k],0);
+  const cashUsers = AGE_KEYS.reduce((s,k)=>s+Math.max(catTotals[k]-couponUseTotals[k],0),0);
+
+  el.innerHTML = `
+    <div class="toolbar">
+      <div class="stats">集計データをCSVでダウンロードできます（Excel等で開けます）</div>
+      <div>
+        <button class="btn primary" id="csvSummary">集計サマリー</button>
+        <button class="btn ghost" id="csvTickets">受付データ</button>
+        <button class="btn ghost" id="csvWaiting">整理券データ</button>
+        <button class="btn ghost" id="csvRentals">レンタルデータ</button>
+        <button class="btn ghost" id="csvCoupon">回数券束売り</button>
+      </div>
+    </div>
+    <div class="sectiontitle">本日の受付集計（金額）</div>
+    <div class="statgrid">
+      <div class="stattile"><div class="lbl">受付件数</div><div class="val">${totalTickets}</div></div>
+      <div class="stattile"><div class="lbl">合計利用人数</div><div class="val">${totalPeople}</div></div>
+      <div class="stattile"><div class="lbl">基本料金合計</div><div class="val">${yen(baseFeeTotal)}</div></div>
+      <div class="stattile"><div class="lbl">延長料金合計</div><div class="val">${yen(extFeeTotal)}</div></div>
+      <div class="stattile"><div class="lbl">当日支払売上合計</div><div class="val">${yen(cashTotal)}</div></div>
+    </div>
+    <div class="hint" style="font-size:11px;color:var(--ink-soft);margin:6px 0 4px;">※回数券利用分は基本料金から除いた当日支払分のみを集計しています（回数券の売上は下部の「束売り」で管理）。延長料金は回数券区分に関わらず当日支払としてカウントしています。</div>
+
+    <div class="sectiontitle">最終区分別集計（回数券利用／購入／減免）</div>
+    <div class="statgrid">
+      <div class="stattile"><div class="lbl">当日支払利用者数</div><div class="val">${cashUsers}</div><div class="sub">通常料金・当日支払</div></div>
+      <div class="stattile"><div class="lbl">回数券利用者数</div><div class="val">${couponUsersTotal}</div><div class="sub">当日、回数券を使った人</div></div>
+      <div class="stattile"><div class="lbl">減免対象者数</div><div class="val">${catTotals.reduced}</div><div class="sub">対象者本人</div></div>
+      <div class="stattile"><div class="lbl">介助者数</div><div class="val">${catTotals.assistant}</div><div class="sub">介添者</div></div>
+      <div class="stattile"><div class="lbl">回数券購入冊数</div><div class="val">${couponBooksSold}</div><div class="sub">累計・束売り登録より</div></div>
+      <div class="stattile"><div class="lbl">回数券購入金額</div><div class="val">${yen(couponSalesTotal)}</div><div class="sub">累計・束売り登録より</div></div>
+    </div>
+
+    <div class="sectiontitle">区分ごとの利用者数</div>
+    <div class="tablewrap"><table>
+      <thead><tr>${ROW_DEFS.map(r=>`<th>${r.label}</th>`).join('')}</tr></thead>
+      <tbody><tr>${ROW_DEFS.map(r=>`<td>${catTotals[r.key]}人</td>`).join('')}</tr></tbody>
+    </table></div>
+
+    <div class="sectiontitle">回数券 利用人数（区分ごと）</div>
+    <div class="tablewrap"><table>
+      <thead><tr>${AGE_KEYS.map(k=>`<th>${rowDef(k).label}</th>`).join('')}</tr></thead>
+      <tbody><tr>${AGE_KEYS.map(k=>`<td>${couponUseTotals[k]}人</td>`).join('')}</tr></tbody>
+    </table></div>
+
+    ${bySport.length>0 ? `<div class="sectiontitle">種目別内訳</div><div class="tablewrap"><table>
+      <thead><tr><th>種目</th><th>受付件数</th><th>利用人数</th></tr></thead>
+      <tbody>${bySport.map(x=>`<tr><td>${SPORTS[x.sport].icon} ${x.sport}</td><td>${x.count}</td><td>${x.people}</td></tr>`).join('')}</tbody>
+    </table></div>` : ''}
+
+    <div class="sectiontitle">整理券</div>
+    <div class="statgrid">
+      <div class="stattile"><div class="lbl">発行数</div><div class="val">${waitTotal}</div></div>
+      <div class="stattile"><div class="lbl">待機中</div><div class="val">${waitActive}</div></div>
+      <div class="stattile"><div class="lbl">キャンセル</div><div class="val">${waitCancelled}</div></div>
+    </div>
+
+    <div class="sectiontitle">レンタル用具</div>
+    <div class="statgrid">
+      <div class="stattile"><div class="lbl">本日の貸出件数</div><div class="val">${rentalTodayCount}</div></div>
+      <div class="stattile"><div class="lbl">現在貸出中（数量）</div><div class="val">${rentalOutCount}</div></div>
+    </div>
+    <div class="tablewrap" style="margin-top:10px;"><table>
+      <thead><tr><th>品目</th><th>上限</th><th>貸出中</th><th>空き</th></tr></thead>
+      <tbody>${EQUIP_KEYS.map(item=>{
+        const out = rentedQty(item), meta=EQUIPMENT[item];
+        return `<tr><td>${meta.icon} ${item}</td><td>${meta.max}</td><td>${out}</td><td>${meta.max-out}</td></tr>`;
+      }).join('')}</tbody>
+    </table></div>
+
+    <div class="sectiontitle">回数券 束売り登録</div>
+    <div class="statgrid">
+      <div class="stattile"><div class="lbl">売上合計（累計）</div><div class="val">${yen(couponSalesTotal)}</div></div>
+    </div>
+    <div class="card" style="margin:10px 0 12px;">
+      <div class="field"><label>区分</label>
+        <select id="csType">${AGE_KEYS.map(k=>`<option value="${k}">${rowDef(k).label}（1冊${yen(rowDef(k).coupon)}）</option>`).join('')}</select></div>
+      <div class="field"><label>冊数</label><input id="csCount" type="number" min="1" value="1"></div>
+      <div class="field"><label>通し番号</label><input id="csSerial" type="text" placeholder="例：1001〜1050"></div>
+      <div class="totalline" id="csTotalLine">金額：${yen(rowDef(AGE_KEYS[0]).coupon)}</div>
+      <button class="btn primary" id="csSubmit">登録する</button>
+    </div>
+    ${couponRows.length===0 ? '<div class="empty">まだ登録がありません。</div>' : `
+    <div class="tablewrap"><table>
+      <thead><tr><th>日時</th><th>区分</th><th>冊数</th><th>金額</th><th>通し番号</th></tr></thead>
+      <tbody>${couponRows.map(r=>`<tr>
+        <td class="num">${fmtTime(new Date(r.soldAt))}</td>
+        <td>${rowDef(r.type).label}</td><td>${r.count}冊</td><td>${yen(r.amount)}</td><td>${escapeHtml(r.serial)}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>`}
+
+    <div class="sectiontitle">受付スケジュール設定</div>
+    <div class="card" style="margin-bottom:14px;font-size:12px;color:var(--ink-soft);">
+      曜日・時間帯ごとに実施する2種目（種目指定／フリーの区別を含む）を設定してください。設定は自動保存され、受付画面にすぐ反映されます。<br>
+      最大枠数：卓球7台／バドミントン4面／バレーボール1面／バスケットボール1面／武道1面<br>
+      最低利用人数：卓球2人〜（種目指定のみ）／バドミントン2人〜（種目指定）・4人〜（フリー）／バレーボール6人〜／バスケットボール5人〜（フリーのみ）／武道1人〜（種目指定）・5人〜（フリー）
+    </div>
+    ${scheduleTableHtml()}
+  `;
+  function updateCsTotal(){
+    const type = document.getElementById('csType').value;
+    const count = Number(document.getElementById('csCount').value)||0;
+    document.getElementById('csTotalLine').textContent = `金額：${yen(count*rowDef(type).coupon)}`;
+  }
+  document.getElementById('csType').onchange = updateCsTotal;
+  document.getElementById('csCount').oninput = updateCsTotal;
+  document.getElementById('csSubmit').onclick = async ()=>{
+    const type = document.getElementById('csType').value;
+    const count = Number(document.getElementById('csCount').value);
+    const serial = document.getElementById('csSerial').value.trim();
+    if(!count || count<1){ showToast('冊数を入力してください'); return; }
+    if(!serial){ showToast('通し番号を入力してください'); return; }
+    couponSales.push({
+      id:'cs_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+      type, count, serial, amount: count*rowDef(type).coupon, soldAt: new Date().toISOString()
+    });
+    const ok = await saveCouponSales();
+    if(ok){ showToast('登録しました'); renderAdmin(); }
+  };
+  bindScheduleEvents(el);
+  document.getElementById('csvSummary').onclick = ()=> exportSummaryCSV({
+    totalTickets, totalPeople, baseFeeTotal, extFeeTotal, cashTotal, cashUsers,
+    couponUsersTotal, catTotals, couponUseTotals, bySport,
+    waitTotal, waitActive, waitCancelled, rentalTodayCount, rentalOutCount,
+    couponBooksSold, couponSalesTotal
+  });
+  document.getElementById('csvTickets').onclick = exportTicketsCSV;
+  document.getElementById('csvWaiting').onclick = exportWaitingCSV;
+  document.getElementById('csvRentals').onclick = exportRentalsCSV;
+  document.getElementById('csvCoupon').onclick = exportCouponSalesCSV;
+}
+
+/* ---------- 受付スケジュール（管理タブ内に統合） ---------- */
+function scheduleTableHtml(){
+  const opts = scheduleOptionsList();
   let rows = '';
   for(let d=0; d<7; d++){
     rows += `<tr><th>${WD[d]}曜日</th>`;
     PERIODS.forEach(p=>{
       const pair = schedule[d][p.key];
+      const optHtml = (entry)=> opts.map(o=>`<option value="${o.key}" ${(entry && entry.sport===o.sport && entry.mode===o.mode)?'selected':''}>${o.label}</option>`).join('');
       rows += `<td>
         <div style="font-size:10px;color:var(--ink-soft);margin-bottom:4px;">${p.label}</div>
-        <select data-day="${d}" data-period="${p.key}" data-idx="0">${SPORT_KEYS.map(s=>`<option value="${s}" ${pair[0]===s?'selected':''}>${s}</option>`).join('')}</select>
-        <select data-day="${d}" data-period="${p.key}" data-idx="1">${SPORT_KEYS.map(s=>`<option value="${s}" ${pair[1]===s?'selected':''}>${s}</option>`).join('')}</select>
+        <select data-day="${d}" data-period="${p.key}" data-idx="0">${optHtml(pair[0])}</select>
+        <select data-day="${d}" data-period="${p.key}" data-idx="1">${optHtml(pair[1])}</select>
       </td>`;
     });
     rows += `</tr>`;
   }
-  el.innerHTML = `
-    <div class="card" style="margin-bottom:14px;font-size:12px;color:var(--ink-soft);">
-      曜日・時間帯ごとに実施する2種目を設定してください。設定は自動保存され、受付画面にすぐ反映されます。<br>
-      枠数の目安：卓球7／バドミントン4／バレーボール1／バスケットボール1／武道1／フリー1
-    </div>
-    <div class="schedwrap tablewrap"><table class="sched">
+  return `<div class="schedwrap tablewrap"><table class="sched">
       <thead><tr><th></th>${PERIODS.map(p=>`<th>${p.label}</th>`).join('')}</tr></thead>
       <tbody>${rows}</tbody>
     </table></div>`;
-  el.querySelectorAll('select').forEach(sel=>{
+}
+function bindScheduleEvents(el){
+  el.querySelectorAll('select[data-day]').forEach(sel=>{
     sel.onchange = async ()=>{
       const day = Number(sel.dataset.day), period = sel.dataset.period, idx = Number(sel.dataset.idx);
       const other = idx===0?1:0;
-      if(sel.value === schedule[day][period][other]){
+      const [sport, modeVal] = sel.value.split('|');
+      const otherEntry = schedule[day][period][other];
+      if(otherEntry.sport === sport){
         showToast('同じ種目は選べません');
-        sel.value = schedule[day][period][idx];
+        const cur = schedule[day][period][idx];
+        sel.value = cur.sport+'|'+cur.mode;
         return;
       }
-      schedule[day][period][idx] = sel.value;
+      schedule[day][period][idx] = {sport, mode: modeVal};
       await saveSchedule();
       showToast('保存しました');
       renderReception();
+      tickClock();
     };
   });
 }
 
-/* ---------- tabs ---------- */
-document.querySelectorAll('nav.tabs button').forEach(btn=>{
-  btn.onclick = ()=>{
-    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    activeTab = btn.dataset.tab;
-    ['reception','roster','settings'].forEach(t=>{
-      document.getElementById('tab-'+t).style.display = (t===activeTab)?'block':'none';
-    });
+/* ---------- モード（利用者 / 管理者）とタブ切り替え ---------- */
+const ALL_TAB_KEYS = ['reception','waiting','rental','roster','admin'];
+const USER_TABS = [
+  {key:'reception', label:'受付'},
+  {key:'waiting', label:'整理券'},
+  {key:'rental', label:'レンタル'}
+];
+const ADMIN_ONLY_TABS = [
+  {key:'roster', label:'名簿・状況'},
+  {key:'admin', label:'管理'}
+];
+
+function renderNav(){
+  const nav = document.getElementById('navTabs');
+  const tabs = mode==='admin' ? [...USER_TABS, ...ADMIN_ONLY_TABS] : USER_TABS;
+  nav.innerHTML = tabs.map(t=>`<button data-tab="${t.key}" class="${activeTab===t.key?'active':''}">${t.label}</button>`).join('')
+    + `<button id="adminToggle" class="admin-toggle">${mode==='admin' ? '利用者画面へ戻る' : '管理者用'}</button>`;
+  nav.querySelectorAll('button[data-tab]').forEach(btn=>{
+    btn.onclick = ()=> switchTab(btn.dataset.tab);
+  });
+  document.getElementById('adminToggle').onclick = ()=>{
+    mode = (mode==='admin') ? 'user' : 'admin';
+    if(mode==='user' && (activeTab==='roster' || activeTab==='admin')){
+      activeTab = 'reception';
+      showGrid = false;
+    }
+    renderNav();
+    showActiveTab();
   };
-});
+}
+function switchTab(key){
+  if(activeTab==='reception' && key!=='reception'){ showGrid = false; }
+  activeTab = key;
+  renderNav();
+  showActiveTab();
+}
+function showActiveTab(){
+  ALL_TAB_KEYS.forEach(t=>{
+    document.getElementById('tab-'+t).style.display = (t===activeTab) ? 'block' : 'none';
+  });
+  if(activeTab==='reception') renderReception();
+  if(activeTab==='waiting') renderWaiting();
+  if(activeTab==='rental') renderRental();
+  if(activeTab==='roster') renderRoster();
+  if(activeTab==='admin') renderAdmin();
+}
 
 /* ---------- init ---------- */
 async function init(){
-  tickClock();
-  setInterval(tickClock, 1000);
-  setInterval(()=>{ if(activeTab==='reception') renderReception(); if(activeTab==='roster') renderRoster(); }, 20000);
+  try{
+    setInterval(tickClock, 1000);
+    setInterval(()=>{
+      if(activeTab==='reception') renderReception();
+      if(activeTab==='roster') renderRoster();
+    }, 20000);
+    setInterval(checkSoonAlerts, 15000);
 
-  document.getElementById('tab-reception').innerHTML = `<div class="empty">読み込み中…</div>`;
-  schedule = await loadSchedule();
-  tickets = await loadTickets(currentDate);
-  renderReception();
-  renderRoster();
-  renderSettings();
+    document.getElementById('tab-reception').innerHTML = `<div class="empty">読み込み中…</div>`;
+    schedule = await loadSchedule();
+    tickets = await loadTickets(currentDate);
+    waitingList = await loadWaiting(currentDate);
+    rentals = await loadRentals(currentDate);
+    couponSales = await loadCouponSales();
+    tickClock();
+    checkSoonAlerts();
+    renderNav();
+    showActiveTab();
+  }catch(e){
+    document.getElementById('tab-reception').innerHTML =
+      `<div class="offhours card">読み込み中にエラーが発生しました。<br>
+       このメッセージを開発者に伝えてください：<br>
+       <code style="font-size:11px;">${escapeHtml(String(e && e.message ? e.message : e))}</code></div>`;
+  }
 }
-init();
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+}else{
+  init();
+}
 </script>
 </body>
 </html>
